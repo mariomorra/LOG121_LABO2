@@ -160,8 +160,6 @@ public class CommBase{
 				String shell = "";
 				while(isActif && shell != null){ // quand shell devient null, le serveur a quitté 
 					try{
-						Thread.sleep(DELAI);
-						
 						// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
 						shell = reponse.readLine();
 						
@@ -169,18 +167,20 @@ public class CommBase{
 							for(int i = 0; i<10; i++){
 								demande.println("GET");
 			 					//La méthode suivante alerte l'observateur 
-								if(listener!=null)
-								   firePropertyChange("FORME-CREE", null, (Object) reponse.readLine());
-								reponse.readLine();
+								if(listener!=null){
+									firePropertyChange("FORME-CREE", null, (Object) reponse.readLine());
+									reponse.readLine();
+								}
 							}
 						}
 						
+						isActif = false;
 					}catch (Exception e){
 						// attrapper les erreurs pour empecher le Thread de s'interrompre.
 						isActif = false;
 					}
 				}
-				firePropertyChange("CONNEXION", null, (Object) "END");
+				if(shell == null) firePropertyChange("CONNEXION", null, (Object) "END");
 				stop();
 				return null;
 			}

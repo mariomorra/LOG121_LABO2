@@ -36,7 +36,7 @@ public abstract class UsineFormes {
 	public static Forme genereForme(String descriptionForme){
 		
 		Forme chose = null;
-		int nseq = ParseurRegex.getUidFromString(descriptionForme);
+		int nseq = 0000; //ParseurRegex.getUidFromString(descriptionForme);
 		int[] mesures = ParseurRegex.getMeasurementsFromDescription(descriptionForme);
 		
 		switch(ParseurRegex.getShapeFromDescription(descriptionForme)){
@@ -51,7 +51,8 @@ public abstract class UsineFormes {
 			case "LIGNE":
 				chose = new Ligne(nseq, mesures[0], mesures[1], mesures[2], mesures[3]); break;
 		}
-		
+
+		System.out.println("Processing: "+ descriptionForme);
 		return chose;
 	}
 
