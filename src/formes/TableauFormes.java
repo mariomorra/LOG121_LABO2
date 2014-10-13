@@ -26,6 +26,7 @@ public class TableauFormes {
 	
 	private Forme teteListeOriginale;
 	private Forme teteListeModifiee;
+	private Boolean trie = false;
 	
 	public TableauFormes() {
 		teteListeOriginale = null;
@@ -66,7 +67,7 @@ public class TableauFormes {
 		boolean triTermine;
 		
 		try {
-			teteListeModifiee = teteListeOriginale.clone();
+			teteListeModifiee = (Forme) teteListeOriginale.clone();
 		} catch (CloneNotSupportedException e) {
 			
 		}
@@ -87,7 +88,7 @@ public class TableauFormes {
 		} catch(Exception e){return -1;}
 		
 		if(triTermine = true){return 1;}
-		
+		trie = true;
 		return 0;
 		
 	}
@@ -111,7 +112,14 @@ public class TableauFormes {
 		}
 	}
 	
+	public Forme debut(){
+		return teteListeOriginale;
+	}
 //  http://javarevisited.blogspot.ca/2014/08/bubble-sort-algorithm-in-java-with.html
+
+	public boolean estTrie() {
+		return trie;
+	}
 	
 	
 

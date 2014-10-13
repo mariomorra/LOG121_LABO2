@@ -1,52 +1,54 @@
+package affichage;
+import util.CommBase;
+
 /******************************************************
-Cours : LOG121
-Session : A2014
-Groupe : 01
-Projet : Laboratoire #1
-…tudiant : Mario Morra
-Code(s) perm. : MORM07039202 (AM54710)
-Professeur : Ghizlane El boussaidi
-ChargÈs de labo : Alvine Boaye Belle et Michel Gagnon
-Nom du fichier : ApplicationFormes.java
-Date crÈÈ : 2014-09-20
-Date dern. modif. 2014-09-20
+Cours :				LOG121
+Session :			Automne 2014
+Groupe :			01
+Projet :			Exercice 1
+
+√âtudiant(e)(s) :	Kolytchev, Dmitri
+Code(s) perm. :		KOLD15088804
+
+Professeur :		Ghizlane El boussaidi
+Charg√©s de labo.:	Alvine Boaye Belle et Michel Gagnon
+Nom du fichier :	ApplicationFormes.java
+Date cr√©e :			2013-05-03
+Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
 *******************************************************
-2014-09-20 Version initiale
+*@author Dmitri Kolytchev
+*2014-09-17 Adaptation initiale du squelette
+*@author Patrice Boucher
+*2013-05-03 Version initiale
 *******************************************************/
 
-package affichage;
 
-import ca.etsmtl.log.util.IDLogger;
-import formes.TableauFormes;
-import util.CommBase;
 
-public class ApplicationFormes {
+
+/**
+ * Cette classe repr√©sente l'application dans son ensemble. 
+ * @author Patrice Boucher
+ * @date 2013/05/04
+ */
+public class ApplicationFormes{
 	
-	private CommBase comm;
-	private FenetrePrincipale fenetre;
-	private static IDLogger logger;
-
+	/**
+	 * main de l'application
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		new ApplicationFormes();	
-		ApplicationFormes.setLogger(IDLogger.getInstance());
+		@SuppressWarnings("unused")
+		ApplicationFormes application = new ApplicationFormes();
 	}
 	
+	/**
+	 * Constructeur
+	 */
 	public ApplicationFormes(){
-		comm = new CommBase();		
-		String host = "localhost";
-		int port = 10000;
-		comm.connect(host, port);	
-		fenetre = new FenetrePrincipale(comm);
+		CommBase comm = new CommBase();
+		FenetrePrincipale fenetre = new FenetrePrincipale(comm);
 		comm.setPropertyChangeListener(fenetre);
-	}
-
-	public static IDLogger getLogger() {
-		return logger;
-	}
-
-	public static void setLogger(IDLogger logger) {
-		ApplicationFormes.logger = logger;
 	}
 }
