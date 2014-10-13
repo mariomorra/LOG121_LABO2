@@ -1,26 +1,33 @@
+package affichage;
 /******************************************************
-Cours : LOG121
-Session : A2014
-Groupe : 01
-Projet : Laboratoire #1
-�tudiant : Mario Morra
-Code(s) perm. : MORM07039202 (AM54710)
-Professeur : Ghizlane El boussaidi
-Charg�s de labo : Alvine Boaye Belle et Michel Gagnon
-Nom du fichier : MenuFenetre.java
-Date cr�� : 2014-09-20
-Date dern. modif. 2014-09-20
+Cours :				LOG121
+Session :			Automne 2014
+Groupe :			01
+Projet :			Exercice 1
+
+Étudiant(e)(s) :	Kolytchev, Dmitri
+Code(s) perm. :		KOLD15088804
+
+Professeur :		Ghizlane El boussaidi
+Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Nom du fichier:		MenuFenetre.java
+Date crée :			2013-05-03
+Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
 *******************************************************
-2014-09-20 Version initiale
+*@author Dmitri Kolytchev
+*2014-09-17 Adaptation initiale du squelette
+*@author Patrice Boucher
+*2013-05-03 Version initiale
 *******************************************************/
 
-package affichage;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -28,9 +35,10 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import util.CommBase;
-import util.LangueConfig;
 
-
+/**
+ * Crée le menu de la fenêtre de l'applicationé
+ */
 public class MenuFenetre extends JMenuBar{
 	
 	private static final long serialVersionUID = 1536336192561843187L;
@@ -53,8 +61,11 @@ public class MenuFenetre extends JMenuBar{
 	private JMenuItem arreterMenuItem, demarrerMenuItem;
 	private static final int DELAI_QUITTER_MSEC = 200;
  	   
-	CommBase comm;
+	CommBase comm; // Pour activer/désactiver la communication avec le serveur
 	
+	/**
+	 * Constructeur
+	 */
 	public MenuFenetre(CommBase comm) {
 		this.comm = comm;
 		addMenuDessiner();
@@ -62,6 +73,9 @@ public class MenuFenetre extends JMenuBar{
 		addMenuAide();
 	}
 
+	/**
+	 *  Créer le menu "Draw". 
+	 */
 	protected void addMenuDessiner() {
 		JMenu menu = creerMenu(MENU_DESSIN_TITRE,new String[] { MENU_DESSIN_DEMARRER, MENU_DESSIN_ARRETER });
 
@@ -72,7 +86,6 @@ public class MenuFenetre extends JMenuBar{
 			rafraichirMenus();
 		  }
 		});
-		
 		demarrerMenuItem.setAccelerator(KeyStroke.getKeyStroke(
 				MENU_DESSIN_DEMARRER_TOUCHE_RACC,
 				MENU_DESSIN_DEMARRER_TOUCHE_MASK));
@@ -91,6 +104,9 @@ public class MenuFenetre extends JMenuBar{
 		add(menu);
 	}
 
+	/** 
+	 * Créer le menu "File". 
+	 */
 	protected void addMenuFichier() {
 		JMenu menu = creerMenu(MENU_FICHIER_TITRE, new String[] { MENU_FICHIER_QUITTER });
 		menu.getItem(0).addActionListener(new ActionListener() {
@@ -110,6 +126,9 @@ public class MenuFenetre extends JMenuBar{
 		add(menu);
 	}
 
+	/**
+	 *  Créer le menu "Help". 
+	 */
 	private void addMenuAide() {
 		JMenu menu = creerMenu(MENU_AIDE_TITRE, new String[] { MENU_AIDE_PROPOS });
 		menu.getItem(0).addActionListener(new ActionListener() {
@@ -121,12 +140,20 @@ public class MenuFenetre extends JMenuBar{
 		add(menu);
 	}
 
-
+	/**
+	 *  Activer ou désactiver les items du menu selon la sélection. 
+	 */
 	private void rafraichirMenus() {
 		demarrerMenuItem.setEnabled(!comm.isActif());
 		arreterMenuItem.setEnabled(comm.isActif());
 	}
-
+	
+	/**
+	 * Créer un élément de menu à partir d'un champs principal et ses éléments
+	 * @param titleKey champs principal
+	 * @param itemKeys éléments
+	 * @return le menu
+	 */
 	private static JMenu creerMenu(String titleKey,String[] itemKeys) {
         JMenu menu = new JMenu(LangueConfig.getResource(titleKey));
         for(int i=0; i < itemKeys.length; ++i) {

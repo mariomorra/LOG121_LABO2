@@ -21,7 +21,7 @@ package formes;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class Forme implements Cloneable{
+public abstract class Forme implements Cloneable, FormeChainee, Dessinable{
 	
 	protected int nseq;
 	protected Color couleur;

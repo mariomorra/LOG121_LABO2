@@ -1,145 +1,201 @@
+package util;
 /******************************************************
-Cours : LOG121
-Session : A2014
-Groupe : 01
-Projet : Laboratoire #1
-Étudiant : Mario Morra
-Code(s) perm. : MORM07039202 (AM54710)
-Professeur : Ghizlane El boussaidi
-Chargés de labo : Alvine Boaye Belle et Michel Gagnon
-Nom du fichier : CommBase.java
-Date créé : 2014-09-20
-Date dern. modif. 2014-09-20
+Cours :				LOG121
+Session :			Automne 2014
+Groupe :			01
+Projet :			Exercice 1
+
+Étudiant(e)(s) :	Kolytchev, Dmitri
+Code(s) perm. :		KOLD15088804
+
+Professeur :		Ghizlane El boussaidi
+Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Nom du fichier: 	CommBase.java
+Date crée :			2013-05-03
+Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
 *******************************************************
-2014-09-20 Version initiale
-2014-09-26 Boucle while
-2014-10-02 Ajustement dans la méthode de connection
-           Ajout des méthodes connect() et disconnect()
+*@author Dmitri Kolytchev
+*2014-09-19 Ajout des variables "client", "demande" et "reponse" et de la connexion
+*2014-09-17 Adaptation initiale du squelette
+*@author Patrice Boucher
+*2013-05-03 Version initiale
 *******************************************************/
 
-package util;
+
 
 import java.beans.PropertyChangeListener;
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-import affichage.FenetrePrincipale;
-import formes.Carre;
-import formes.Cercle;
-import formes.Ellipse;
-import formes.Forme;
-import formes.Ligne;
-import formes.Rectangle;
 
-public class CommBase {
+/**
+ * Base d'une communication via un fil d'exécution parallèle.
+ */
+public class CommBase{
 	
 	private final int DELAI = 1000;
-	private SwingWorker<?, ?> threadComm = null;
+	private SwingWorker threadComm =null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;
 	
-	Socket skt;
-	Scanner in;
-	PrintStream out;
-	String messageRecu;	
 	
+
+	private Socket client;
+    private BufferedReader reponse;
+    private PrintWriter demande;
+    
+	/**
+	 * Constructeur
+	 */
 	public CommBase(){
-		
 	}
 	
-	public void connect(String host, int port){
-		try{
-			skt = new Socket(host, port);
-			in = new Scanner(skt.getInputStream());
-			out = new PrintStream(skt.getOutputStream());	
-		}
-		catch(Exception e){}
-	}
-	
-	public void disconnect(){
-		try{
-			out.println("END");
-			skt.close();
-			in = null;
-			out = null;
-			skt = null;
-		}
-		catch(Exception e){}
-	}
-	
+	/**
+	 * Définir le récepteur de l'information reçue dans la communication avec le serveur
+	 * @param listener sera alerté lors de l'appel de "firePropertyChanger" par le SwingWorker
+	 */
 	public void setPropertyChangeListener(PropertyChangeListener listener){
 		this.listener = listener;
 	}
 	
+	/**
+	 * Démarre la communication
+	 */
 	public void start(){
-		if(skt != null){creerCommunication();}
+		
+		String query = JOptionPane.showInputDialog(null, "Veuillez spécifier le serveur et le port", "serveur:port");
+		
+		if(query == null || query.isEmpty())
+			return; // cancellation utilisateur
+		
+		else if(query.matches("^[a-zA-Z0-9\\.\\-\\_]+:[0-9]+$") == false){
+			JOptionPane.showMessageDialog(null, "Veuillez vous assurer que l'addresse est sous la forme de \"serveur:port\"\n(le port doit être numérique)");
+			return;
+		}
+		
+		String[] addresse = query.split(":");
+		
+		/*
+		 * Esseyer de se connecter au serveur. Si une erreur survient, notifier l'utilisateur.
+		 */
+		
+		try {
+			
+			client = new Socket(addresse[0], Integer.parseInt(addresse[1]));
+			
+			/*=========================================================================================================
+			 * CODE EMPRUNTÉ:
+			 * les variables "reponse" et "demande" sont basées sur le code de ce tutoriel:
+			 * http://docs.oracle.com/javase/tutorial/networking/sockets/readingWriting.html
+			 * J'ai utilisé les exemples de BufferedReader et PrintWriter pour réaliser la communication client-serveur
+			 *=========================================================================================================*/
+			reponse = new BufferedReader(new InputStreamReader(client.getInputStream()));
+		    demande = new PrintWriter(client.getOutputStream(), true);
+		    /*
+		     * Fin du code emprunté.
+		     */
+		    
+			creerCommunication();
+		    
+		} catch (UnknownHostException e) {
+			// On réussit pas à trouver un serveur, notifier l'utilisateur.
+			JOptionPane.showMessageDialog(null, "Le serveur spécifié n'a pas pu être trouvé (vérifiez votre addresse)");
+			return;
+			
+		} catch (ConnectException e) {
+			// On réussit pas à nous connecter à un serveur, notifier l'utilisateur.
+			JOptionPane.showMessageDialog(null, "Le serveur spécifié a refusé la connection (est-ce que le port est le bon?)");
+			return;
+			
+		} catch (IOException e) {
+			// Une erreur de transfert est survenue, notifier l'utilisateur
+			JOptionPane.showMessageDialog(null, "Erreur de connexion.");
+			return;
+		} 
 	}
 	
+	/**
+	 * Arrête la communication et effectue une remise-à-zéro pour pouvoir retenter une connexion ultérieure.
+	 */
 	public void stop(){
-		if(threadComm!=null)
-			threadComm.cancel(true); 
+
 		isActif = false;
-		disconnect();
+		
+		try{
+			if(demande != null) demande.println("END");
+			reponse.close();
+			demande.close();
+			client.close();
+			
+		} catch(Exception e){
+			// quelques objets sont nuls, probablement parce que le serveur s'est déconnecté. Rien à faire ici.
+		}
+		
+		reponse = null;
+	    demande = null;
+		client = null;
+		
 	}
 	
+	/**
+	 * Crée un processus parallèle qui s'occupera de la communication. Lance des Évènements PropertyChange pour signaler son état.
+	 */
 	protected void creerCommunication(){		
-		threadComm = new SwingWorker<Object, Object>(){
-
+		// Crée un fil d'exécusion paralléle au fil courant,
+		
+		threadComm = new SwingWorker(){
+			
 			@Override
 			protected Object doInBackground() throws Exception {
-			
-				while(true){
-					try{			
+				String shell = "";
+				while(isActif && shell != null){ // quand shell devient null, le serveur a quitté 
+					try{
+						// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
+						shell = reponse.readLine();
 						
-						out.flush();
-						out.println("GET");
-							
-						Thread.sleep(DELAI);
-						
-						in.nextLine();
-						messageRecu = in.nextLine();
-					
-						Forme nouvelleForme = CreateurFormes.creerForme(messageRecu);
-						FenetrePrincipale.fenetreFormes.ajouterForme(nouvelleForme);
-						
-						if(listener!=null){
-							firePropertyChange("ENVOIE-TEST", null, (Object) ".");
+						if(shell!= null && shell.equals("commande> ")){
+							for(int i = 0; i<10; i++){
+								demande.println("GET");
+			 					//La méthode suivante alerte l'observateur 
+								if(listener!=null){
+									firePropertyChange("FORME-CREE", null, (Object) reponse.readLine());
+									reponse.readLine();
+								}
+							}
 						}
-					}
-					catch(Exception ex){
-						System.out.println(ex.getMessage());
-						out.println("END");
-						skt.close();
-					}
-					finally{
 						
+						isActif = false;
+					}catch (Exception e){
+						// attrapper les erreurs pour empecher le Thread de s'interrompre.
+						isActif = false;
 					}
-					if(skt.isClosed()){
-						break;
-					}
-				}	
-				
+				}
+				if(shell == null) firePropertyChange("CONNEXION", null, (Object) "END");
+				stop();
 				return null;
 			}
 		};
+		
 		if(listener!=null)
-		   threadComm.addPropertyChangeListener(listener);	
-		threadComm.execute();
+			threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwingWorker invoquera la méthode "firePropertyChanger"
+
+		threadComm.execute(); // Lance le fil d'exécution parallèle.
 		isActif = true;
 	}
 	
+	/**
+	 * @return si le fil d'exécution parallèle est actif
+	 */
 	public boolean isActif(){
 		return isActif;
 	}
