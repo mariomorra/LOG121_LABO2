@@ -22,35 +22,35 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class Forme implements Cloneable, FormeChainee, Dessinable{
-	
+
 	protected int nseq;
 	protected Color couleur;
 	protected int coordA;
 	protected int coordB;
 	protected int coordC;
 	protected int coordD;
-	
+
 	protected Forme formePrecedente;
 	protected Forme formeSuivante;
-	
+
 	public int obtenirNseq() {return nseq;}
-	
+
 	public Color obtenirCouleur() {return couleur;}
-	
+
 	public abstract int obtenirHauteur();
 	public abstract int obtenirLargeur();
 	public abstract void dessinerForme(Graphics g);
 	public abstract void dessinerForme(Graphics g, int x, int y);
 	public abstract void dessinerCadre(Graphics g, int x, int y);
-	
+
 	public Forme obtenirFormePrecedente(){
 		return formePrecedente;
 	}
-	
+
 	public Forme obtenirFormeSuivante(){
 		return formeSuivante;
 	}
-	
+
 	public boolean estTete(){
 		return formePrecedente == null;
 	}
@@ -61,13 +61,12 @@ public abstract class Forme implements Cloneable, FormeChainee, Dessinable{
 
 	public void assignerFormePrecedente(Forme nouvelleForme) {
 		formePrecedente = nouvelleForme;
-		
 	}
-	
+
 	@Override
 	public Forme clone() throws CloneNotSupportedException{
-		return (Forme) super.clone();	
+		return (Forme) super.clone();
 	}
-	
+
 
 }

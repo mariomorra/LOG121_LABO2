@@ -27,20 +27,20 @@ Historique des modifications
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
+import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
-
 import util.CommBase;
 
 /**
  * Crée le menu de la fenêtre de l'applicationé
  */
 public class MenuFenetre extends JMenuBar{
-	
+
 	private static final long serialVersionUID = 1536336192561843187L;
 	private static final int  MENU_DESSIN_ARRETER_TOUCHE_MASK  = ActionEvent.CTRL_MASK;
 	private static final char MENU_DESSIN_ARRETER_TOUCHE_RACC  = KeyEvent.VK_A;
@@ -55,26 +55,36 @@ public class MenuFenetre extends JMenuBar{
 			MENU_DESSIN_DEMARRER = "app.frame.menus.draw.start",
 			MENU_DESSIN_ARRETER = "app.frame.menus.draw.stop",
 			MENU_AIDE_TITRE = "app.frame.menus.help.title",
+			MENU_TRI_NUMSEQCROISSANT = "app.frame.menus.file.SortNumSeqCroissant",
+			MENU_TRI_NUMSEQDECROISSANT = "app.frame.menus.file.SortNumSeqDecroissant",
+			MENU_TRI_AIRCROISSANT = "app.frame.menus.file.SortAirCroissant",
+			MENU_TRI_AIRDECROISSANT = "app.frame.menus.file.SortAirDecroissant",
+			MENU_TRI_TYPEFORMEA = "app.frame.menus.file.SortTypeFormeA",
+			MENU_TRI_TYPEFORMEB = "app.frame.menus.file.SortTypeFormeB",
+			MENU_TRI_DISTANCE = "app.frame.menus.file.SortDistance",
 			MENU_AIDE_PROPOS = "app.frame.menus.help.about";
-	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";  
+
+	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";
 
 	private JMenuItem arreterMenuItem, demarrerMenuItem;
+	private ButtonGroup groupTri = new ButtonGroup();
 	private static final int DELAI_QUITTER_MSEC = 200;
- 	   
+
 	CommBase comm; // Pour activer/désactiver la communication avec le serveur
-	
+
 	/**
 	 * Constructeur
 	 */
 	public MenuFenetre(CommBase comm) {
 		this.comm = comm;
 		addMenuDessiner();
+		addMenuTrier();
 		addMenuFichier();
 		addMenuAide();
 	}
 
 	/**
-	 *  Créer le menu "Draw". 
+	 *  Créer le menu "Draw".
 	 */
 	protected void addMenuDessiner() {
 		JMenu menu = creerMenu(MENU_DESSIN_TITRE,new String[] { MENU_DESSIN_DEMARRER, MENU_DESSIN_ARRETER });
@@ -92,26 +102,30 @@ public class MenuFenetre extends JMenuBar{
 
 		arreterMenuItem = menu.getItem(1);
 		arreterMenuItem.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent arg0) {
 			comm.stop();
 			rafraichirMenus();
 		    }
 	    });
-		
+
 		arreterMenuItem.setAccelerator(KeyStroke.getKeyStroke(
 				MENU_DESSIN_ARRETER_TOUCHE_RACC,
 				MENU_DESSIN_ARRETER_TOUCHE_MASK));
+		arreterMenuItem.setEnabled(false);
 		add(menu);
 	}
 
-	/** 
-	 * Créer le menu "File". 
+	/**
+	 * Créer le menu "File".
 	 */
 	protected void addMenuFichier() {
 		JMenu menu = creerMenu(MENU_FICHIER_TITRE, new String[] { MENU_FICHIER_QUITTER });
+
+		// Quitter
 		menu.getItem(0).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				comm.stop();
+				System.out.println(arg0.toString());
+				//comm.stop();
 			    try {
 						Thread.sleep(DELAI_QUITTER_MSEC);
 				} catch (InterruptedException e) {
@@ -120,6 +134,8 @@ public class MenuFenetre extends JMenuBar{
 				System.exit(0);
 			}
 		});
+
+		// Quitter
 		menu.getItem(0).setAccelerator(
 				KeyStroke.getKeyStroke(MENU_FICHIER_QUITTER_TOUCHE_RACC,
 						MENU_FICHIER_QUITTER_TOUCHE_MASK));
@@ -127,13 +143,13 @@ public class MenuFenetre extends JMenuBar{
 	}
 
 	/**
-	 *  Créer le menu "Help". 
+	 *  Créer le menu "Help".
 	 */
 	private void addMenuAide() {
 		JMenu menu = creerMenu(MENU_AIDE_TITRE, new String[] { MENU_AIDE_PROPOS });
 		menu.getItem(0).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null,  LangueConfig.getResource(MESSAGE_DIALOGUE_A_PROPOS), 
+				JOptionPane.showMessageDialog(null,  LangueConfig.getResource(MESSAGE_DIALOGUE_A_PROPOS),
 						LangueConfig.getResource(MENU_AIDE_PROPOS), JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
@@ -141,13 +157,13 @@ public class MenuFenetre extends JMenuBar{
 	}
 
 	/**
-	 *  Activer ou désactiver les items du menu selon la sélection. 
+	 *  Activer ou désactiver les items du menu selon la sélection.
 	 */
 	private void rafraichirMenus() {
-		demarrerMenuItem.setEnabled(!comm.isActif());
-		arreterMenuItem.setEnabled(comm.isActif());
+		demarrerMenuItem.setEnabled(comm.isActif());
+		arreterMenuItem.setEnabled(!comm.isActif());
 	}
-	
+
 	/**
 	 * Créer un élément de menu à partir d'un champs principal et ses éléments
 	 * @param titleKey champs principal
@@ -161,4 +177,94 @@ public class MenuFenetre extends JMenuBar{
         }
         return menu;
    }
+
+	private void addMenuTrier() {
+		JMenu menu = new JMenu("Trier");
+
+		JRadioButtonMenuItem MENU_TRI_NUMSEQCROISSANT = new JRadioButtonMenuItem("Numero Sequence (Croissant)");
+		JRadioButtonMenuItem MENU_TRI_NUMSEQDECROISSANT = new JRadioButtonMenuItem("Numero de sequence (decroissant)");
+		JRadioButtonMenuItem MENU_TRI_AIRCROISSANT = new JRadioButtonMenuItem("Air de forme (croissant)");
+		JRadioButtonMenuItem MENU_TRI_AIRDECROISSANT = new JRadioButtonMenuItem("Air de forme (decroissant)");
+		JRadioButtonMenuItem MENU_TRI_TYPEFORMEA = new JRadioButtonMenuItem("Type de forme (Carre, Rectangle, Cercle, Ovale, Ligne)");
+		JRadioButtonMenuItem MENU_TRI_TYPEFORMEB = new JRadioButtonMenuItem("Air de forme (Ligne, Ovale, Cercle, Rectangle, Carre)");
+		JRadioButtonMenuItem MENU_TRI_DISTANCE = new JRadioButtonMenuItem("Distance (croissante)");
+		JRadioButtonMenuItem MENU_TRI_NORMAL = new JRadioButtonMenuItem("Normal");
+
+		groupTri.add(MENU_TRI_NUMSEQCROISSANT);
+		groupTri.add(MENU_TRI_NUMSEQDECROISSANT);
+		groupTri.add(MENU_TRI_AIRCROISSANT);
+		groupTri.add(MENU_TRI_AIRDECROISSANT);
+		groupTri.add(MENU_TRI_TYPEFORMEA);
+		groupTri.add(MENU_TRI_TYPEFORMEB);
+		groupTri.add(MENU_TRI_DISTANCE);
+		groupTri.add(MENU_TRI_NORMAL);
+
+		menu.add(MENU_TRI_NUMSEQCROISSANT);
+		menu.add(MENU_TRI_NUMSEQDECROISSANT);
+		menu.add(MENU_TRI_AIRCROISSANT);
+		menu.add(MENU_TRI_AIRDECROISSANT);
+		menu.add(MENU_TRI_TYPEFORMEA);
+		menu.add(MENU_TRI_TYPEFORMEB);
+		menu.add(MENU_TRI_DISTANCE);
+		menu.add(MENU_TRI_NORMAL);
+
+		// Tri Numero Sequence Croissant
+		menu.getItem(0).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Tri Numero Sequence (Croissant)");
+			}
+		});
+
+		// Tri Numero Sequence Decroissant
+		menu.getItem(1).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Tri Numero Sequence (Decroissant)");
+			}
+		});
+
+		// Tri Air Croissant
+		menu.getItem(2).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Tri Air (Croissant)");
+			}
+		});
+
+		// Tri Air Decroissant
+		menu.getItem(3).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Tri Air (Decroissant)");
+			}
+		});
+
+		// Tri Type forme A
+		menu.getItem(4).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Tri Type Forme A");
+			}
+		});
+
+		// Tri Type Forme B
+		menu.getItem(5).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Tri Type Forme B");
+			}
+		});
+
+		// Tri Distance
+		menu.getItem(6).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Tri Distance (Croissant)");
+			}
+		});
+
+		// Normal
+		menu.getItem(7).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Normal");
+			}
+		});
+
+		add(menu);
+	}
+
 }

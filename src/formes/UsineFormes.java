@@ -34,11 +34,11 @@ public abstract class UsineFormes {
 	 * @return: nouvelle forme selon les spécifications, ou null si la forme n'a pas pu être parsée
 	 */
 	public static Forme genereForme(String descriptionForme){
-		
+
 		Forme chose = null;
 		int nseq = 0000; //ParseurRegex.getUidFromString(descriptionForme);
 		int[] mesures = ParseurRegex.getMeasurementsFromDescription(descriptionForme);
-		
+
 		switch(ParseurRegex.getShapeFromDescription(descriptionForme)){
 			case "RECTANGLE":
 				chose = new Rectangle(nseq, mesures[0], mesures[1], mesures[2], mesures[3]); break;
@@ -52,7 +52,6 @@ public abstract class UsineFormes {
 				chose = new Ligne(nseq, mesures[0], mesures[1], mesures[2], mesures[3]); break;
 		}
 
-		System.out.println("Processing: "+ descriptionForme);
 		return chose;
 	}
 

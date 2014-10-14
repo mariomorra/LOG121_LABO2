@@ -25,12 +25,12 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 
 public class Ellipse extends Forme {
-	
+
 	protected int centreX;
 	protected int centreY;
 	protected int rayonV;
 	protected int rayonH;
-	
+
 	public Ellipse(int nseq, int x, int y, int h, int l){
 		super.nseq = nseq;
 		super.couleur = Color.GREEN;
@@ -39,19 +39,19 @@ public class Ellipse extends Forme {
 		this.rayonV = h;
 		this.rayonH = l;
 	}
-	
+
 	public int obtenirX(){
 		return centreX;
 	}
-	
+
 	public int obtenirY(){
 		return centreY;
 	}
-	
+
 	public int obtenirHauteur(){
 		return rayonV;
 	};
-	
+
 	public int obtenirLargeur(){
 		return rayonH;
 	}
@@ -60,16 +60,16 @@ public class Ellipse extends Forme {
 	public void dessinerForme(Graphics g) {
 		dessinerForme(g, centreX, centreY);
 	};
-	
+
 	@Override
 	public void dessinerForme(Graphics g, int x, int y) {
 		g.setColor(couleur);
 		g.fillOval(x, y, rayonH, rayonV);
 		g.setColor(Color.BLACK);
 		g.drawOval(x, y, rayonH, rayonV);
-		
+
 	}
-	
+
 	@Override
 	public void dessinerCadre(Graphics g, int x, int y) {
 		Graphics2D g2d = (Graphics2D) g.create();

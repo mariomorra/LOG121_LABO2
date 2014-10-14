@@ -22,12 +22,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Ligne extends Forme {
-	
+
 	private int x1;
 	private int y1;
 	private int x2;
 	private int y2;
-	
+
 	public Ligne(int nseq, int x1, int y1, int x2, int y2){
 		super.nseq = nseq;
 		super.couleur = Color.BLACK;
@@ -36,25 +36,25 @@ public class Ligne extends Forme {
 		this.x2 = x2;
 		this.y2 = y2;
 	}
-	
+
 	public int obtenirX(){
 		return x1;
 	}
-	
+
 	public int obtenirY(){
 		return y1;
 	}
-	
+
 	public int obtenirX2(){
 		return x2;
 	}
-	
+
 	public int obtenirY2(){
 		return y2;
 	}
 
 	@Override
-	public int obtenirHauteur() {	
+	public int obtenirHauteur() {
 		return y2-y1;
 	}
 
@@ -65,19 +65,18 @@ public class Ligne extends Forme {
 
 	@Override
 	public void dessinerForme(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		dessinerForme(g, x1, y1);
 	}
 
 	@Override
 	public void dessinerForme(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
-		
+		g.setColor(couleur);
+		g.drawLine(x, y, x2, y2);
 	}
 
 	@Override
 	public void dessinerCadre(Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

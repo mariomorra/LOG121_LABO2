@@ -21,7 +21,7 @@ package formes;
 import tri.ComparateurForme;
 
 public class TableauFormes {
-	
+
 	private static final int NB_MAX_FORMES = 10;
 
 	private Forme teteListeOriginale;
@@ -29,28 +29,28 @@ public class TableauFormes {
 
 	private Forme queueListeOriginale;
 	private Forme queueListeModifiee;
-	
+
 	private Boolean trie = false;
-	
+
 	public TableauFormes() {
 		teteListeOriginale = null;
 		teteListeModifiee = null;
 	}
-	
+
 	private int nbFormes(){
 		int nbFormes = 0;
 		Forme f = teteListeOriginale;
 		if(f == null) return 0;
-		
+
 		while(f.obtenirFormeSuivante() != null){
 			nbFormes++;
 			f = f.obtenirFormeSuivante();
 		}
 		return nbFormes;
 	}
-	
+
 	public void ajouterForme(Forme nouvelleForme){
-		if(nbFormes() == NB_MAX_FORMES){
+		if(nbFormes() == NB_MAX_FORMES-1){
 			decalerListe();
 		}
 		if(queueListeOriginale != null)
@@ -59,25 +59,25 @@ public class TableauFormes {
 			teteListeOriginale = nouvelleForme;
 		queueListeOriginale = nouvelleForme;
 	}
-	
+
 	private void decalerListe(){
 		teteListeOriginale = teteListeOriginale.obtenirFormeSuivante();
 		teteListeOriginale.assignerFormePrecedente(null);
 	}
 
-	
+
 	public int trier(ComparateurForme comparator) {
-		
+
 		boolean triTermine;
-		
+
 		try {
 			teteListeModifiee = (Forme) teteListeOriginale.clone();
 		} catch (CloneNotSupportedException e) {
-			
+
 		}
 
 		Forme f = teteListeModifiee;
-		
+
 		try{
 			do{
 				triTermine = true;
@@ -87,16 +87,16 @@ public class TableauFormes {
 						echangerAvecSuivant(f);
 						f = f.obtenirFormeSuivante();
 					}
-				}	
+				}
 			} while (triTermine == false);
 		} catch(Exception e){return -1;}
-		
+
 		if(triTermine = true){return 1;}
 		trie = true;
 		return 0;
-		
+
 	}
-	
+
 	private void echangerAvecSuivant(Forme f){
 		Forme noeud = f;
 		Forme suivant = f.obtenirFormeSuivante();
@@ -107,7 +107,7 @@ public class TableauFormes {
 				suivant.assignerFormePrecedente(prec);
 			}
 			Forme apresSuivant = suivant.obtenirFormeSuivante();
-			if(apresSuivant != null){	
+			if(apresSuivant != null){
 				noeud.assignerFormeSuivante(apresSuivant);
 				apresSuivant.assignerFormePrecedente(noeud);
 			}
@@ -115,7 +115,7 @@ public class TableauFormes {
 			suivant.assignerFormeSuivante(noeud);
 		}
 	}
-	
+
 	public Forme debut(){
 		return teteListeOriginale;
 	}
@@ -124,8 +124,8 @@ public class TableauFormes {
 	public boolean estTrie() {
 		return trie;
 	}
-	
-	
+
+
 
 
 }
