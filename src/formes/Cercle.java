@@ -22,8 +22,8 @@ import java.awt.Color;
 
 public class Cercle extends Ellipse {
 
-	public Cercle(int nseq, int x, int y, int h, int l) {
-		super(nseq, x, y, h, l);
+	public Cercle(int nseq, int x, int y, int r) {
+		super(nseq, x, y, r, r);
 		super.couleur = Color.BLUE;	
 	}
 

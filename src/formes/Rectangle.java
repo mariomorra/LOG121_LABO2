@@ -18,8 +18,11 @@ Historique des modifications
 
 package formes;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 
 public class Rectangle extends Forme {
 
@@ -62,12 +65,13 @@ public class Rectangle extends Forme {
 	public void dessinerForme(Graphics g, int x, int y) {
 		g.setColor(couleur);
 		g.fillRect(x, y, obtenirLargeur(), obtenirHauteur());
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, obtenirLargeur(), obtenirHauteur());
 	}
 
 	@Override
 	public void dessinerCadre(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
-		
+
 	}
 	
 }

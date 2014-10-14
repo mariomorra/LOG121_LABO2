@@ -65,13 +65,14 @@ public class Ligne extends Forme {
 
 	@Override
 	public void dessinerForme(Graphics g) {
-		// TODO Auto-generated method stub
+		dessinerForme(g, x1, y1);
 		
 	}
 
 	@Override
 	public void dessinerForme(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
+		g.setColor(couleur);
+		g.drawLine(x, y, x2, y2);
 		
 	}
 
@@ -79,6 +80,5 @@ public class Ligne extends Forme {
 	public void dessinerCadre(Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
 		
-	};
-	
+	}
 }

@@ -1,86 +1,94 @@
+package affichage;
 /******************************************************
-Cours : LOG121
-Session : A2014
-Groupe : 01
-Projet : Laboratoire #1
-�tudiant : Mario Morra
-Code(s) perm. : MORM07039202 (AM54710)
-Professeur : Ghizlane El boussaidi
-Charg�s de labo : Alvine Boaye Belle et Michel Gagnon
-Nom du fichier : FenetreFormes.java
-Date cr�� : 2014-09-20
-Date dern. modif. 2014-09-20
+Cours :				LOG121
+Session :			Automne 2014
+Groupe :			01
+Projet :			Exercice 1
+
+Étudiant(e)(s) :	Kolytchev, Dmitri
+Code(s) perm. :		KOLD15088804
+
+Professeur :		Ghizlane El boussaidi
+Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Nom du fichier: 	FenetreFormes.java
+Date crée :			2013-05-03
+Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
 *******************************************************
-2014-09-20 Version initiale
-2014-09-26 Ajout de la m�thode afficherForme
-2014-09-29 Suppression de la m�thode afficherForme
-           et modification de paintComponent
+*@author Dmitri Kolytchev
+*2014-09-26 Amélioration de la documentation
+*2014-09-17 Adaptation initiale du squelette
+*@author Patrice Boucher
+*2013-05-03 Version initiale
 *******************************************************/
 
-package affichage;
+
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-import formes.Carre;
-import formes.Cercle;
-import formes.Ellipse;
 import formes.Forme;
-import formes.Ligne;
-import formes.Rectangle;
 import formes.TableauFormes;
 
-public class FenetreFormes extends JComponent {
+/**
+ * Cette fenêtre génère l'affichage des formes 
+ * @author Patrice Boucher
+ * @date 2013/05/04
+ */
+public class FenetreFormes extends JComponent{
 	
 	private static final long serialVersionUID = -2262235643903749505L;
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	public static final Dimension dimension = new Dimension(500,500);
 	
-	TableauFormes formes;
-
+	private final int offsetX = 80;
+	private final int offsetY = 50;
+	
+	private TableauFormes formesList;
+	
+	/**
+	 * Constructeur
+	 */
 	public FenetreFormes(){
-		formes = new TableauFormes();
+		formesList = new TableauFormes();
 	}
 	
-	
+	/**
+	 * Affiche la liste de formes 
+	 */
 	@Override 
-	public void paintComponent(Graphics g){	
-//		repaint();
-//		for(Forme f : formes.tableau()){
-//			if(f != null){
-//				g.setColor(f.obtenirCouleur());
-//				Class<? extends Forme> c = f.getClass();
-//				//if(c == Rectangle.class){
-//				if(c == Rectangle.class || c == Carre.class){	
-//					g.fillRect(f.obtenirX(), f.obtenirY(), f.obtenirLargeur(), f.obtenirHauteur());
-//				}
-//				if(c == Ligne.class){
-//					Ligne l = (Ligne)f; //Pour �viter la confusion on offre des m�thodes sp�cifiques por la ligne
-//					g.drawLine(l.obtenirX(), l.obtenirY(), l.obtenirX2(), l.obtenirY2());
-//				}
-//				if(c == Ellipse.class || c == Cercle.class){
-//					g.fillOval(f.obtenirX(), f.obtenirY(), f.obtenirLargeur(), f.obtenirHauteur());
-//				}
-//			}
-//		}	 	
+	public void paintComponent(Graphics g){
+		int i = 0;
+		Forme formeActuelle = formesList.debut();
+		while(formeActuelle != null){
+			if(formesList.estTrie())
+				formeActuelle.dessinerForme(g, i*offsetX, i*offsetY);
+			else
+				formeActuelle.dessinerForme(g);
+			formeActuelle = formeActuelle.obtenirFormeSuivante();
+			i++;
+		}
+		
 	}
-
+	
+	/**
+	 * Le Layout qui utilise (contient) FenetreFormes doit réserver 
+	 * l'espace nécessaire à son affichage
+	 */
 	@Override 
 	public Dimension getPreferredSize(){
 		return dimension;
 	}
 	
-	public void ajouterForme(Forme f){
-		if(f != null){
-			formes.ajouterForme(f);
-			paintComponent(this.getGraphics());	
-		}
+	/**
+	 * @param f prend une Forme et l'ajoute à la fin de la liste des formes à dessiner. Si la liste dépasserait 10, les éléments les plus vieux (les premiers de la liste) se font enlever.
+	 */
+	public void ajout(Forme nouvelleForme){
+		formesList.ajouterForme(nouvelleForme);
+		repaint();
 	}
-	
 }
-
