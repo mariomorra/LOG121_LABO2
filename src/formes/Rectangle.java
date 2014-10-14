@@ -75,4 +75,14 @@ public class Rectangle extends Forme {
 
 	}
 
+	@Override
+	public double obtenirDiagonale() {
+		return Math.sqrt(Math.pow(obtenirLargeur(), 2) + Math.pow(obtenirHauteur(), 2));
+	}
+
+	@Override
+	public double obtenirAire() {
+		return obtenirLargeur() * obtenirHauteur();
+	}
+
 }

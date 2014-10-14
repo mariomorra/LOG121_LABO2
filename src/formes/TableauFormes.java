@@ -18,7 +18,7 @@ Historique des modifications
 
 package formes;
 
-import tri.ComparateurForme;
+import comparateur.ComparateurForme;
 
 public class TableauFormes {
 

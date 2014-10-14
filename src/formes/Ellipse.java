@@ -77,5 +77,15 @@ public class Ellipse extends Forme {
 		g2d.drawRect(centreX - rayonH, centreY - rayonV, rayonH * 2, rayonV * 2);
 	}
 
+	@Override
+	public double obtenirDiagonale() {
+		return Math.max(rayonV, rayonH)*2;
+	}
+
+	@Override
+	public double obtenirAire() {
+		return (int) (Math.PI * rayonV * rayonH);
+	}
+
 
 }

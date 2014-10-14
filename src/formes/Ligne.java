@@ -79,4 +79,14 @@ public class Ligne extends Forme {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public double obtenirDiagonale() {
+		return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+	}
+
+	@Override
+	public double obtenirAire() {
+		return obtenirDiagonale();
+	}
 }
