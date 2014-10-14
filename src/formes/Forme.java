@@ -38,6 +38,8 @@ public abstract class Forme implements Cloneable, FormeChainee, Dessinable{
 	public Color obtenirCouleur() {return couleur;}
 
 
+	public abstract int obtenirX();
+	public abstract int obtenirY();
 	public abstract int obtenirHauteur();
 	public abstract int obtenirLargeur();
 	public abstract double obtenirDiagonale();

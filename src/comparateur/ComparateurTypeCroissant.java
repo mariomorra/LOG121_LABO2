@@ -7,7 +7,7 @@ import formes.Forme;
 import formes.Ligne;
 import formes.Rectangle;
 
-public class CompareType extends ComparateurForme {
+public class ComparateurTypeCroissant extends ComparateurForme {
 
 	@Override
 	public int compare(Forme o1, Forme o2) {

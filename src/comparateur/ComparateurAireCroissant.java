@@ -2,7 +2,7 @@ package comparateur;
 
 import formes.Forme;
 
-public class CompareAire extends ComparateurForme {
+public class ComparateurAireCroissant extends ComparateurForme {
 
 	@Override
 	public int compare(Forme o1, Forme o2) {
