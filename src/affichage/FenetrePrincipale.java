@@ -72,7 +72,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 	// Appelé lorsque le sujet lance "firePropertyChanger"
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
-		
+		System.out.println("WTF");
 		if(arg0.getPropertyName().equals("FORME-CREE")){
 			String formeString = (String) arg0.getNewValue();
 			

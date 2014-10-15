@@ -18,12 +18,25 @@ Historique des modifications
 
 package formes;
 
+<<<<<<< Updated upstream
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+=======
+<<<<<<< HEAD
+import java.awt.Color;
+import java.awt.Graphics;
+=======
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
+>>>>>>> pr/1
+>>>>>>> Stashed changes
 
 public class Rectangle extends Forme {
 
@@ -66,11 +79,10 @@ public class Rectangle extends Forme {
 	public void dessinerForme(Graphics g, int x, int y) {
 		g.setColor(couleur);
 		g.fillRect(x, y, obtenirLargeur(), obtenirHauteur());
-		g.setColor(Color.BLACK);
-		g.drawRect(x, y, obtenirLargeur(), obtenirHauteur());
-		
 		if(x != x1 && y != y1)
 			dessinerCadre(g, x, y);
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, obtenirLargeur(), obtenirHauteur());
 	}
 
 	@Override

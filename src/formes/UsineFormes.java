@@ -38,7 +38,6 @@ public abstract class UsineFormes {
 		Forme chose = null;
 		int nseq = 0000; //ParseurRegex.getUidFromString(descriptionForme);
 		int[] mesures = ParseurRegex.getMeasurementsFromDescription(descriptionForme);
-
 		switch(ParseurRegex.getShapeFromDescription(descriptionForme)){
 			case "RECTANGLE":
 				chose = new Rectangle(nseq, mesures[0], mesures[1], mesures[2], mesures[3]); break;

@@ -5,6 +5,22 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Exercice 1
 
+<<<<<<< Updated upstream
+�tudiant(e)(s) :	Kolytchev, Dmitri
+=======
+<<<<<<< HEAD
+�tudiant(e)(s) :	Kolytchev, Dmitri
+>>>>>>> Stashed changes
+Code(s) perm. :		KOLD15088804
+
+Professeur :		Ghizlane El boussaidi
+Charg�s de labo.:	Alvine Boaye Belle et Michel Gagnon
+Nom du fichier: 	CommBase.java
+<<<<<<< Updated upstream
+Date cr�e :			2013-05-03
+=======
+Date cr�e :			2013-05-03
+=======
 �tudiant(e)(s) :	Kolytchev, Dmitri
 Code(s) perm. :		KOLD15088804
 
@@ -12,6 +28,8 @@ Professeur :		Ghizlane El boussaidi
 Charg�s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier: 	CommBase.java
 Date cr�e :			2013-05-03
+>>>>>>> pr/1
+>>>>>>> Stashed changes
 Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
@@ -36,6 +54,7 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+<<<<<<< Updated upstream
 import affichage.FenetrePrincipale;
 
 /**
@@ -61,6 +80,7 @@ public class CommBase{
 	}
 
 	/**
+<<<<<<< Updated upstream
 	 * D�finir le r�cepteur de l'information re�ue dans la communication avec le serveur
 	 * @param listener sera alert� lors de l'appel de "firePropertyChanger" par le SwingWorker
 	 */
@@ -72,9 +92,7 @@ public class CommBase{
 	 * D�marre la communication
 	 */
 	public void start(){
-
-		String query = JOptionPane.showInputDialog(null, "Veuillez sp�cifier le serveur et le port", "localhost:10000");
-
+		String query = JOptionPane.showInputDialog(null, "Veuillez sp�cifier le serveur et le port", "serveur:port");
 		if(query == null || query.isEmpty())
 			return; // cancellation utilisateur
 		else if(query.matches("^[a-zA-Z0-9\\.\\-\\_]+:[0-9]+$") == false){
@@ -112,8 +130,11 @@ public class CommBase{
 			return;
 
 		} catch (ConnectException e) {
-			// On r�ussit pas � nous connecter � un serveur, notifier l'utilisateur.
-			JOptionPane.showMessageDialog(null, "Le serveur sp�cifi� a refus� la connection (est-ce que le port est le bon?)");
+			// On r�ussit pas � trouver un serveur, notifier l'utilisateur.
+			JOptionPane.showMessageDialog(null, "Le serveur sp�cifi� n'a pas pu �tre trouv� (v�rifiez votre addresse)");
+			return;
+			
+		}
 			return;
 
 		} catch (IOException e) {
@@ -149,22 +170,21 @@ public class CommBase{
 	/**
 	 * Cr�e un processus parall�le qui s'occupera de la communication. Lance des �v�nements PropertyChange pour signaler son �tat.
 	 */
-	protected void creerCommunication(){
+	protected void creerCommunication(){		
 		// Cr�e un fil d'ex�cusion parall�le au fil courant,
-
 		threadComm = new SwingWorker(){
 
 			@Override
 			protected Object doInBackground() throws Exception {
 				String shell = "";
-				while(isActif && shell != null){ // quand shell devient null, le serveur a quitt�
+				while(isActif && shell != null){ // quand shell devient null, le serveur a quitt� 
 					try{
 						// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
 						shell = reponse.readLine();
 						for(int i = 0; i<10; i++){
 							if(shell != null && shell.equals("commande> ")){
 								demande.println("GET");
-			 					//La m�thode suivante alerte l'observateur
+			 					//La m�thode suivante alerte l'observateur 
 								if(listener!=null){
 									firePropertyChange("FORME-CREE", null, (Object) reponse.readLine());
 									reponse.readLine();

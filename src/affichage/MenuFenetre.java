@@ -27,12 +27,27 @@ Historique des modifications
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+<<<<<<< Updated upstream
 import javax.swing.ButtonGroup;
+=======
+
+<<<<<<< HEAD
+=======
+import javax.swing.ButtonGroup;
+>>>>>>> pr/1
+>>>>>>> Stashed changes
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+<<<<<<< Updated upstream
 import javax.swing.JRadioButtonMenuItem;
+=======
+<<<<<<< HEAD
+=======
+import javax.swing.JRadioButtonMenuItem;
+>>>>>>> pr/1
+>>>>>>> Stashed changes
 import javax.swing.KeyStroke;
 import util.CommBase;
 
@@ -68,6 +83,8 @@ public class MenuFenetre extends JMenuBar{
 
 	private JMenuItem arreterMenuItem, demarrerMenuItem;
 	private ButtonGroup groupTri = new ButtonGroup();
+			
+	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";  
 	private static final int DELAI_QUITTER_MSEC = 200;
 
 	CommBase comm; // Pour activer/désactiver la communication avec le serveur
@@ -102,15 +119,19 @@ public class MenuFenetre extends JMenuBar{
 
 		arreterMenuItem = menu.getItem(1);
 		arreterMenuItem.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0) {
-			comm.stop();
-			rafraichirMenus();
-		    }
-	    });
+			public void actionPerformed(ActionEvent arg0) {
+				arreterMenuItem = menu.getItem(1);
+				arreterMenuItem.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0) {
+					comm.stop();
+					rafraichirMenus();
+			    }
+			});
 
 		arreterMenuItem.setAccelerator(KeyStroke.getKeyStroke(
 				MENU_DESSIN_ARRETER_TOUCHE_RACC,
 				MENU_DESSIN_ARRETER_TOUCHE_MASK));
+		
 		arreterMenuItem.setEnabled(false);
 		add(menu);
 	}
@@ -126,6 +147,7 @@ public class MenuFenetre extends JMenuBar{
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(arg0.toString());
 				comm.stop();
+
 			    try {
 						Thread.sleep(DELAI_QUITTER_MSEC);
 				} catch (InterruptedException e) {
@@ -177,10 +199,10 @@ public class MenuFenetre extends JMenuBar{
         }
         return menu;
    }
-
+	
 	private void addMenuTrier() {
 		JMenu menu = new JMenu("Trier");
-
+		
 		JRadioButtonMenuItem MENU_TRI_NUMSEQCROISSANT = new JRadioButtonMenuItem("Numero Sequence (Croissant)");
 		JRadioButtonMenuItem MENU_TRI_NUMSEQDECROISSANT = new JRadioButtonMenuItem("Numero de sequence (decroissant)");
 		JRadioButtonMenuItem MENU_TRI_AIRCROISSANT = new JRadioButtonMenuItem("Air de forme (croissant)");
@@ -189,16 +211,7 @@ public class MenuFenetre extends JMenuBar{
 		JRadioButtonMenuItem MENU_TRI_TYPEFORMEB = new JRadioButtonMenuItem("Air de forme (Ligne, Ovale, Cercle, Rectangle, Carre)");
 		JRadioButtonMenuItem MENU_TRI_DISTANCE = new JRadioButtonMenuItem("Distance (croissante)");
 		JRadioButtonMenuItem MENU_TRI_NORMAL = new JRadioButtonMenuItem("Normal");
-
-		groupTri.add(MENU_TRI_NUMSEQCROISSANT);
-		groupTri.add(MENU_TRI_NUMSEQDECROISSANT);
-		groupTri.add(MENU_TRI_AIRCROISSANT);
-		groupTri.add(MENU_TRI_AIRDECROISSANT);
-		groupTri.add(MENU_TRI_TYPEFORMEA);
-		groupTri.add(MENU_TRI_TYPEFORMEB);
-		groupTri.add(MENU_TRI_DISTANCE);
-		groupTri.add(MENU_TRI_NORMAL);
-
+		
 		menu.add(MENU_TRI_NUMSEQCROISSANT);
 		menu.add(MENU_TRI_NUMSEQDECROISSANT);
 		menu.add(MENU_TRI_AIRCROISSANT);
@@ -212,6 +225,7 @@ public class MenuFenetre extends JMenuBar{
 		menu.getItem(0).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Tri Numero Sequence (Croissant)");
+				comm.firePropertyChange("SORT", null, null);
 			}
 		});
 
@@ -257,14 +271,7 @@ public class MenuFenetre extends JMenuBar{
 			}
 		});
 
-		// Normal
-		menu.getItem(7).addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Normal");
-			}
-		});
 
 		add(menu);
 	}
-
 }
