@@ -27,6 +27,7 @@ Historique des modifications
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.beans.PropertyChangeEvent;
 
 import javax.swing.JComponent;
 
@@ -90,5 +91,35 @@ public class FenetreFormes extends JComponent{
 	public void ajout(Forme nouvelleForme){
 		formesList.ajouterForme(nouvelleForme);
 		repaint();
+	}
+	
+	public void firePropertyChange(String type, Object nouveau, Object vieux){
+		switch(type){
+			case "NseqCroissant":
+				
+				break;
+			
+			case "NseqDecroissant" :
+				
+				break;
+			
+			case "AireCroissant":
+				break;
+			
+			case "AireDecroissant" :
+				break;
+			
+			case "FormeCroissant" :
+				break;
+				
+			case "FormeDecroissant" :
+				break;
+				
+			case "DiagonaleCroissant" :
+				break;
+				
+			default :
+				return;
+		}
 	}
 }
