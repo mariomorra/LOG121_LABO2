@@ -71,13 +71,10 @@ public class Ligne extends Forme {
 	@Override
 	public void dessinerForme(Graphics g, int x, int y) {
 		g.setColor(couleur);
-		g.drawLine(x, y, x2, y2);
-	}
-
-	@Override
-	public void dessinerCadre(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
-
+		g.drawLine(x, y, x+obtenirLargeur(), y+obtenirHauteur());
+		
+		if(x == x1 && y == y1)
+			dessinerCadre(g, x, y);
 	}
 
 	@Override

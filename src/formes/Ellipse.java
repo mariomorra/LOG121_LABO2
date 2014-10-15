@@ -56,33 +56,27 @@ public class Ellipse extends Forme {
 		return rayonH;
 	}
 
-	@Override
 	public void dessinerForme(Graphics g) {
 		dessinerForme(g, centreX, centreY);
 	};
 
-	@Override
 	public void dessinerForme(Graphics g, int x, int y) {
+
 		g.setColor(couleur);
 		g.fillOval(x, y, rayonH, rayonV);
 		g.setColor(Color.BLACK);
 		g.drawOval(x, y, rayonH, rayonV);
+		
+		if(x == centreX && y == centreY)
+			dessinerCadre(g, x, y);
+
 
 	}
 
-	@Override
-	public void dessinerCadre(Graphics g, int x, int y) {
-		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.setStroke(new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10, new float[]{9}, 0));
-		g2d.drawRect(centreX - rayonH, centreY - rayonV, rayonH * 2, rayonV * 2);
-	}
-
-	@Override
 	public double obtenirDiagonale() {
 		return Math.max(rayonV, rayonH)*2;
 	}
 
-	@Override
 	public double obtenirAire() {
 		return (int) (Math.PI * rayonV * rayonH);
 	}

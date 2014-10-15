@@ -18,8 +18,10 @@ Historique des modifications
 
 package formes;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public abstract class Forme implements Cloneable, FormeChainee, Dessinable{
 
@@ -47,7 +49,15 @@ public abstract class Forme implements Cloneable, FormeChainee, Dessinable{
 	
 	public abstract void dessinerForme(Graphics g);
 	public abstract void dessinerForme(Graphics g, int x, int y);
-	public abstract void dessinerCadre(Graphics g, int x, int y);
+	
+	public void dessinerCadre(Graphics g, int x, int y){
+
+		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setStroke(new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10, new float[]{3}, 0));
+		g2d.drawRect(x,  y,  obtenirLargeur(), obtenirHauteur());
+		g2d.dispose();
+		
+	};
 	
 
 	public Forme obtenirFormePrecedente(){
