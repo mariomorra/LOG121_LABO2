@@ -73,7 +73,7 @@ public class CommBase{
 	 */
 	public void start(){
 
-		String query = JOptionPane.showInputDialog(null, "Veuillez sp�cifier le serveur et le port", "serveur:port");
+		String query = JOptionPane.showInputDialog(null, "Veuillez sp�cifier le serveur et le port", "localhost:10000");
 
 		if(query == null || query.isEmpty())
 			return; // cancellation utilisateur

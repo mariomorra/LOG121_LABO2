@@ -25,7 +25,7 @@ public class Carre extends Rectangle {
 
 	public Carre(int nseq, int x1, int y1, int x2, int y2) {
 		super(nseq, x1, y1, x2, y2);
-		super.couleur = Color.ORANGE;
+		super.couleur = new Color(0xA6FF8000, true);
 	}
 
 }

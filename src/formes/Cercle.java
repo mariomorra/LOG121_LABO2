@@ -24,7 +24,7 @@ public class Cercle extends Ellipse {
 
 	public Cercle(int nseq, int x, int y, int r) {
 		super(nseq, x, y, r, r);
-		super.couleur = Color.BLUE;
+		super.couleur = new Color(0xA60000FF, true);
 	}
 
 }

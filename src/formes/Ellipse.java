@@ -33,7 +33,7 @@ public class Ellipse extends Forme {
 
 	public Ellipse(int nseq, int x, int y, int h, int l){
 		super.nseq = nseq;
-		super.couleur = Color.GREEN;
+		super.couleur = new Color(0xA600FF00, true);
 		this.centreX = x;
 		this.centreY = y;
 		this.rayonV = h;
