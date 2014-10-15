@@ -5,13 +5,13 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Exercice 1
 
-Étudiant(e)(s) :	Kolytchev, Dmitri
+??tudiant(e)(s) :	Kolytchev, Dmitri
 Code(s) perm. :		KOLD15088804
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Charg??s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier:		FenetrePrincipale.java
-Date crée :			2013-05-03
+Date cr??e :			2013-05-03
 Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
@@ -39,7 +39,7 @@ import ca.etsmtl.log.util.IDLogger;
 import formes.UsineFormes;
 
 /**
- * Cette classe représente la fenêtre principale de l'application 
+ * Cette classe repr??sente la fen??tre principale de l'application 
  * @author Patrice Boucher
  * @date 2013/05/04
  */
@@ -62,17 +62,16 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 		
 		this.setLayout(new BorderLayout());
 		this.add(menu, BorderLayout.NORTH); 
-		this.add(fenetreFormes, BorderLayout.CENTER); // Ajoute la fenêtre de forme à la fenètre principale
-		this.pack(); // Ajuste la dimension de la fenêtre principale selon celle de ses composants
-		this.setVisible(true); // Rend la fenêtre principale visible.
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //... à réviser selon le comportement que vous désirez ...
+		this.add(fenetreFormes, BorderLayout.CENTER); // Ajoute la fen??tre de forme ?? la fen??tre principale
+		this.pack(); // Ajuste la dimension de la fen??tre principale selon celle de ses composants
+		this.setVisible(true); // Rend la fen??tre principale visible.
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //... ?? r??viser selon le comportement que vous d??sirez ...
 		this.addWindowListener(this);
 	}
 	
-	// Appelé lorsque le sujet lance "firePropertyChanger"
+	// Appel?? lorsque le sujet lance "firePropertyChanger"
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
-		System.out.println("WTF");
 		if(arg0.getPropertyName().equals("FORME-CREE")){
 			String formeString = (String) arg0.getNewValue();
 			
@@ -85,9 +84,11 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 			String statusString = (String) arg0.getNewValue();
 			
 			if(statusString != null && statusString.equals("END")){
-				JOptionPane.showMessageDialog(null, "Le serveur a déconnecté de façon inattendue.");
+				JOptionPane.showMessageDialog(null, "Le serveur a d??connect?? de fa??on inattendue.");
 			}
 			
+		}else if(arg0.getPropertyName().equals("TRI")){
+			System.out.println(arg0.getNewValue());
 		}
 	}
 

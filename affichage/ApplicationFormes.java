@@ -7,13 +7,13 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Exercice 1
 
-Étudiant(e)(s) :	Kolytchev, Dmitri
+??tudiant(e)(s) :	Kolytchev, Dmitri
 Code(s) perm. :		KOLD15088804
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Charg??s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier :	ApplicationFormes.java
-Date crée :			2013-05-03
+Date cr??e :			2013-05-03
 Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
@@ -28,7 +28,7 @@ Historique des modifications
 
 
 /**
- * Cette classe représente l'application dans son ensemble. 
+ * Cette classe repr??sente l'application dans son ensemble. 
  * @author Patrice Boucher
  * @date 2013/05/04
  */

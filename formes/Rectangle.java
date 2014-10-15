@@ -3,12 +3,12 @@ Cours : LOG121
 Session : A2014
 Groupe : 01
 Projet : Laboratoire #1
-�tudiant : Mario Morra
+???tudiant : Mario Morra
 Code(s) perm. : MORM07039202 (AM54710)
 Professeur : Ghizlane El boussaidi
-Charg�s de labo : Alvine Boaye Belle et Michel Gagnon
+Charg???s de labo : Alvine Boaye Belle et Michel Gagnon
 Nom du fichier : Rectangle.java
-Date cr�� : 2014-09-20
+Date cr?????? : 2014-09-20
 Date dern. modif. 2014-09-20
 *******************************************************
 Historique des modifications
@@ -18,25 +18,15 @@ Historique des modifications
 
 package formes;
 
-<<<<<<< Updated upstream
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-=======
-<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Graphics;
-=======
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
->>>>>>> pr/1
->>>>>>> Stashed changes
+
 
 public class Rectangle extends Forme {
 

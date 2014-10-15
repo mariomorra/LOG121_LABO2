@@ -6,28 +6,28 @@ Groupe :			01
 Projet :			Exercice 1
 
 <<<<<<< Updated upstream
-�tudiant(e)(s) :	Kolytchev, Dmitri
+???tudiant(e)(s) :	Kolytchev, Dmitri
 =======
 <<<<<<< HEAD
-�tudiant(e)(s) :	Kolytchev, Dmitri
+???tudiant(e)(s) :	Kolytchev, Dmitri
 >>>>>>> Stashed changes
 Code(s) perm. :		KOLD15088804
 
 Professeur :		Ghizlane El boussaidi
-Charg�s de labo.:	Alvine Boaye Belle et Michel Gagnon
+Charg???s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier: 	CommBase.java
 <<<<<<< Updated upstream
-Date cr�e :			2013-05-03
+Date cr???e :			2013-05-03
 =======
-Date cr�e :			2013-05-03
+Date cr???e :			2013-05-03
 =======
-�tudiant(e)(s) :	Kolytchev, Dmitri
+???tudiant(e)(s) :	Kolytchev, Dmitri
 Code(s) perm. :		KOLD15088804
 
 Professeur :		Ghizlane El boussaidi
-Charg�s de labo.:	Alvine Boaye Belle et Michel Gagnon
+Charg???s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier: 	CommBase.java
-Date cr�e :			2013-05-03
+Date cr???e :			2013-05-03
 >>>>>>> pr/1
 >>>>>>> Stashed changes
 Date dern. modif.	2014-09-17
@@ -43,6 +43,8 @@ Historique des modifications
 
 
 
+import java.awt.Event;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,11 +56,11 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
-<<<<<<< Updated upstream
+
 import affichage.FenetrePrincipale;
 
 /**
- * Base d'une communication via un fil d'ex�cution parall�le.
+ * Base d'une communication via un fil d'ex???cution parall???le.
  */
 public class CommBase{
 
@@ -81,22 +83,22 @@ public class CommBase{
 
 	/**
 <<<<<<< Updated upstream
-	 * D�finir le r�cepteur de l'information re�ue dans la communication avec le serveur
-	 * @param listener sera alert� lors de l'appel de "firePropertyChanger" par le SwingWorker
+	 * D???finir le r???cepteur de l'information re???ue dans la communication avec le serveur
+	 * @param listener sera alert??? lors de l'appel de "firePropertyChanger" par le SwingWorker
 	 */
 	public void setPropertyChangeListener(PropertyChangeListener listener){
 		this.listener = listener;
 	}
 
 	/**
-	 * D�marre la communication
+	 * D???marre la communication
 	 */
 	public void start(){
-		String query = JOptionPane.showInputDialog(null, "Veuillez sp�cifier le serveur et le port", "serveur:port");
+		String query = JOptionPane.showInputDialog(null, "Veuillez sp???cifier le serveur et le port", "serveur:port");
 		if(query == null || query.isEmpty())
 			return; // cancellation utilisateur
 		else if(query.matches("^[a-zA-Z0-9\\.\\-\\_]+:[0-9]+$") == false){
-			JOptionPane.showMessageDialog(null, "Veuillez vous assurer que l'addresse est sous la forme de \"serveur:port\"\n(le port doit �tre num�rique)");
+			JOptionPane.showMessageDialog(null, "Veuillez vous assurer que l'addresse est sous la forme de \"serveur:port\"\n(le port doit ???tre num???rique)");
 			return;
 		}
 
@@ -111,30 +113,27 @@ public class CommBase{
 			client = new Socket(addresse[0], Integer.parseInt(addresse[1]));
 
 			/*=========================================================================================================
-			 * CODE EMPRUNT�:
-			 * les variables "reponse" et "demande" sont bas�es sur le code de ce tutoriel:
+			 * CODE EMPRUNT???:
+			 * les variables "reponse" et "demande" sont bas???es sur le code de ce tutoriel:
 			 * http://docs.oracle.com/javase/tutorial/networking/sockets/readingWriting.html
-			 * J'ai utilis� les exemples de BufferedReader et PrintWriter pour r�aliser la communication client-serveur
+			 * J'ai utilis??? les exemples de BufferedReader et PrintWriter pour r???aliser la communication client-serveur
 			 *=========================================================================================================*/
 			reponse = new BufferedReader(new InputStreamReader(client.getInputStream()));
 		    demande = new PrintWriter(client.getOutputStream(), true);
 		    /*
-		     * Fin du code emprunt�.
+		     * Fin du code emprunt???.
 		     */
 
 			creerCommunication();
 
 		} catch (UnknownHostException e) {
-			// On r�ussit pas � trouver un serveur, notifier l'utilisateur.
-			JOptionPane.showMessageDialog(null, "Le serveur sp�cifi� n'a pas pu �tre trouv� (v�rifiez votre addresse)");
+			// On r???ussit pas ??? trouver un serveur, notifier l'utilisateur.
+			JOptionPane.showMessageDialog(null, "Le serveur sp???cifi??? n'a pas pu ???tre trouv??? (v???rifiez votre addresse)");
 			return;
 
 		} catch (ConnectException e) {
-			// On r�ussit pas � trouver un serveur, notifier l'utilisateur.
-			JOptionPane.showMessageDialog(null, "Le serveur sp�cifi� n'a pas pu �tre trouv� (v�rifiez votre addresse)");
-			return;
-			
-		}
+			// On r???ussit pas ??? trouver un serveur, notifier l'utilisateur.
+			JOptionPane.showMessageDialog(null, "Le serveur sp???cifi??? n'a pas pu ???tre trouv??? (v???rifiez votre addresse)");
 			return;
 
 		} catch (IOException e) {
@@ -145,7 +144,7 @@ public class CommBase{
 	}
 
 	/**
-	 * Arr�te la communication et effectue une remise-�-z�ro pour pouvoir retenter une connexion ult�rieure.
+	 * Arr???te la communication et effectue une remise-???-z???ro pour pouvoir retenter une connexion ult???rieure.
 	 */
 	public void stop(){
 
@@ -158,7 +157,7 @@ public class CommBase{
 			client.close();
 
 		} catch(Exception e){
-			// quelques objets sont nuls, probablement parce que le serveur s'est d�connect�. Rien � faire ici.
+			// quelques objets sont nuls, probablement parce que le serveur s'est d???connect???. Rien ??? faire ici.
 		}
 
 		reponse = null;
@@ -168,23 +167,23 @@ public class CommBase{
 	}
 
 	/**
-	 * Cr�e un processus parall�le qui s'occupera de la communication. Lance des �v�nements PropertyChange pour signaler son �tat.
+	 * Cr???e un processus parall???le qui s'occupera de la communication. Lance des ???v???nements PropertyChange pour signaler son ???tat.
 	 */
 	protected void creerCommunication(){		
-		// Cr�e un fil d'ex�cusion parall�le au fil courant,
+		// Cr???e un fil d'ex???cusion parall???le au fil courant,
 		threadComm = new SwingWorker(){
 
 			@Override
 			protected Object doInBackground() throws Exception {
 				String shell = "";
-				while(isActif && shell != null){ // quand shell devient null, le serveur a quitt� 
+				while(isActif && shell != null){ // quand shell devient null, le serveur a quitt??? 
 					try{
 						// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
 						shell = reponse.readLine();
 						for(int i = 0; i<10; i++){
 							if(shell != null && shell.equals("commande> ")){
 								demande.println("GET");
-			 					//La m�thode suivante alerte l'observateur 
+			 					//La m???thode suivante alerte l'observateur 
 								if(listener!=null){
 									firePropertyChange("FORME-CREE", null, (Object) reponse.readLine());
 									reponse.readLine();
@@ -205,16 +204,20 @@ public class CommBase{
 		};
 
 		if(listener!=null)
-			threadComm.addPropertyChangeListener(listener); // La m�thode "propertyChange" de ApplicationFormes sera donc appel�e lorsque le SwingWorker invoquera la m�thode "firePropertyChanger"
+			threadComm.addPropertyChangeListener(listener); // La m???thode "propertyChange" de ApplicationFormes sera donc appel???e lorsque le SwingWorker invoquera la m???thode "firePropertyChanger"
 
-		threadComm.execute(); // Lance le fil d'ex�cution parall�le.
+		threadComm.execute(); // Lance le fil d'ex???cution parall???le.
 		isActif = true;
 	}
 
 	/**
-	 * @return si le fil d'ex�cution parall�le est actif
+	 * @return si le fil d'ex???cution parall???le est actif
 	 */
 	public boolean isActif(){
 		return isActif;
+	}
+	
+	public void firePropertyChange(String type, Object nouveau, Object vieux){
+		listener.propertyChange(new PropertyChangeEvent(this, "TRI", vieux, nouveau));
 	}
 }

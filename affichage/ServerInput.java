@@ -22,7 +22,7 @@ public class ServerInput extends JFrame implements ActionListener{
 	protected int server = 0000;
 	
 	private JPanel panelInput = new JPanel();
-	private JFrame frame = new JFrame("Entrée Serveur");
+	private JFrame frame = new JFrame("Entr?e Serveur");
 	private JLabel lblHostNameAndPort = new JLabel("Veuillez indiquer le nom de l'hote ainsi que le port du serveur de forme");
 	private JTextField txtHostAndPort = new JTextField();
 	private JPanel panelActions = new JPanel();

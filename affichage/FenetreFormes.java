@@ -5,19 +5,19 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Exercice 1
 
-Étudiant(e)(s) :	Kolytchev, Dmitri
+??tudiant(e)(s) :	Kolytchev, Dmitri
 Code(s) perm. :		KOLD15088804
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Charg??s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier: 	FenetreFormes.java
-Date crée :			2013-05-03
+Date cr??e :			2013-05-03
 Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
 *******************************************************
 *@author Dmitri Kolytchev
-*2014-09-26 Amélioration de la documentation
+*2014-09-26 Am??lioration de la documentation
 *2014-09-17 Adaptation initiale du squelette
 *@author Patrice Boucher
 *2013-05-03 Version initiale
@@ -34,7 +34,7 @@ import formes.Forme;
 import formes.TableauFormes;
 
 /**
- * Cette fenêtre génère l'affichage des formes 
+ * Cette fen??tre g??n??re l'affichage des formes 
  * @author Patrice Boucher
  * @date 2013/05/04
  */
@@ -76,8 +76,8 @@ public class FenetreFormes extends JComponent{
 	}
 	
 	/**
-	 * Le Layout qui utilise (contient) FenetreFormes doit réserver 
-	 * l'espace nécessaire à son affichage
+	 * Le Layout qui utilise (contient) FenetreFormes doit r??server 
+	 * l'espace n??cessaire ?? son affichage
 	 */
 	@Override 
 	public Dimension getPreferredSize(){
@@ -85,7 +85,7 @@ public class FenetreFormes extends JComponent{
 	}
 	
 	/**
-	 * @param f prend une Forme et l'ajoute à la fin de la liste des formes à dessiner. Si la liste dépasserait 10, les éléments les plus vieux (les premiers de la liste) se font enlever.
+	 * @param f prend une Forme et l'ajoute ?? la fin de la liste des formes ?? dessiner. Si la liste d??passerait 10, les ??l??ments les plus vieux (les premiers de la liste) se font enlever.
 	 */
 	public void ajout(Forme nouvelleForme){
 		formesList.ajouterForme(nouvelleForme);

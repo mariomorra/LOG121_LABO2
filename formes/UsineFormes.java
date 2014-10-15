@@ -5,21 +5,21 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Exercice 1
 
-Étudiant(e)(s) :	Kolytchev, Dmitri
+??tudiant(e)(s) :	Kolytchev, Dmitri
 Code(s) perm. :		KOLD15088804
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Charg??s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier :	UsineFormes.java
-Date crée :			2013-05-03
+Date cr??e :			2013-05-03
 Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
 *******************************************************
 *@author Dmitri Kolytchev
-*2014-09-26 Manipulations de Strings délégué au ParseurRegex
-*2014-09-26 Changement de l'argument pour passer de "String[] forme" à "String forme"
-*2014-09-17 Création initiale de la classe
+*2014-09-26 Manipulations de Strings d??l??gu?? au ParseurRegex
+*2014-09-26 Changement de l'argument pour passer de "String[] forme" ?? "String forme"
+*2014-09-17 Cr??ation initiale de la classe
 *******************************************************/
 
 
@@ -30,8 +30,8 @@ import util.ParseurRegex;
 public abstract class UsineFormes {
 
 	/**
-	 * @param forme: chaine de caracteres decrivant la forme à créer, exemple: CARRE 34 128 256 256
-	 * @return: nouvelle forme selon les spécifications, ou null si la forme n'a pas pu être parsée
+	 * @param forme: chaine de caracteres decrivant la forme ?? cr??er, exemple: CARRE 34 128 256 256
+	 * @return: nouvelle forme selon les sp??cifications, ou null si la forme n'a pas pu ??tre pars??e
 	 */
 	public static Forme genereForme(String descriptionForme){
 

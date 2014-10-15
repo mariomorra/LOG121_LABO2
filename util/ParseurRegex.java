@@ -5,13 +5,13 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Exercice 1
 
-Étudiant(e)(s) :	Kolytchev, Dmitri
+?tudiant(e)(s) :	Kolytchev, Dmitri
 Code(s) perm. :		KOLD15088804
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Charg?s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier: 	ParseurRegex.java
-Date crée :			2013-05-03
+Date cr?e :			2013-05-03
 Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
@@ -19,7 +19,7 @@ Historique des modifications
 *@author Dmitri Kolytchev
 *2014-09-19 Refactoring, creation de genericMatch
 *2014-09-19 Ajout des methodes splitAddress et detecteForme
-*2014-09-17 Création initiale de la classe
+*2014-09-17 Cr?ation initiale de la classe
 *******************************************************/
 
 import java.util.regex.Matcher;
@@ -28,18 +28,18 @@ import java.util.regex.Pattern;
 
 public abstract class ParseurRegex {
 	/**
-	 * Sépare l'adresse d'un serveur du port de connexion.
+	 * S?pare l'adresse d'un serveur du port de connexion.
 	 * @param adresse d'un serveur (ip ou DNS) sous la forme de "adresse:port"
-	 * @return un Array contenant l'adresse du serveur à [0] et le port à [1].
+	 * @return un Array contenant l'adresse du serveur ? [0] et le port ? [1].
 	 */
 	public static String[] splitAddress(String adresse){
 		return genericMatch("^([a-zA-Z0-9.\\-\\_]+):([0-9]+)$", adresse);
 	}
 	
 	/**
-	 * Transforme la commande du serveur en une chaine standardisée.
+	 * Transforme la commande du serveur en une chaine standardis?e.
 	 * @param in commande texte provenant du serveur de formes
-	 * @return chaine standardisée décrivant une forme
+	 * @return chaine standardis?e d?crivant une forme
 	 */
 	public static String getDescription(String in){
 		String descriptionForme = "";
@@ -56,15 +56,15 @@ public abstract class ParseurRegex {
 	/**
 	 * Extrait l'identifiant unique d'une forme de la commande du serveur.
 	 * @param in commande texte provenant du serveur de formes
-	 * @return numéro identifiant, e.g. pour IDLogger
+	 * @return num?ro identifiant, e.g. pour IDLogger
 	 */
 	public static int getUidFromString(String in){
 		return Integer.parseInt(in.split("\\ ")[0]);
 	}
 	
 	/**
-	 * Transforme la chaine de description standardisée en valeures numériques. 
-	 * @param in chaine standardisée décrivant une forme
+	 * Transforme la chaine de description standardis?e en valeures num?riques. 
+	 * @param in chaine standardis?e d?crivant une forme
 	 * @return int[3] ou int[4] contenant les mesures de la forme (e.g. [x, y, largeur, hauteur]) 
 	 */
 	public static int[] getMeasurementsFromDescription(String in){
@@ -81,10 +81,10 @@ public abstract class ParseurRegex {
 	}
 	
 	/**
-	 * Fonction générique de transformation regex. Utilisable en soi, ou comme fonction aide pour d'autres fonctionnalités
-	 * @param regex: l'expression régulière à utiliser
-	 * @param in: la chaine de caractères à manipuler
-	 * @return un String[] contenant les groupes de l'expression régulière.
+	 * Fonction g?n?rique de transformation regex. Utilisable en soi, ou comme fonction aide pour d'autres fonctionnalit?s
+	 * @param regex: l'expression r?guli?re ? utiliser
+	 * @param in: la chaine de caract?res ? manipuler
+	 * @return un String[] contenant les groupes de l'expression r?guli?re.
 	 */
 	public static String[] genericMatch(String regex, String in){
 		Pattern forme = Pattern.compile(regex);

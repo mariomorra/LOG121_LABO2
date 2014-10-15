@@ -5,19 +5,19 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Exercice 1
 
-Étudiant(e)(s) :	Kolytchev, Dmitri
+??tudiant(e)(s) :	Kolytchev, Dmitri
 Code(s) perm. :		KOLD15088804
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Charg??s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier:		Dessinable.java
-Date crée :			2013-05-03
+Date cr??e :			2013-05-03
 Date dern. modif.	2014-09-18
 *******************************************************
 Historique des modifications
 *******************************************************
 *@author Dmitri Kolytchev
-*2014-09-18 Création de l'interface Dessinable
+*2014-09-18 Cr??ation de l'interface Dessinable
 *******************************************************/
 
 import java.awt.Graphics;
