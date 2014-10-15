@@ -69,7 +69,7 @@ public class Rectangle extends Forme {
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, obtenirLargeur(), obtenirHauteur());
 		
-		if(x == x1 && y == y1)
+		if(x != x1 && y != y1)
 			dessinerCadre(g, x, y);
 	}
 

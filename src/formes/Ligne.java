@@ -75,7 +75,7 @@ public class Ligne extends Forme {
 		g.setColor(couleur);
 		g.drawLine(x, y, x+obtenirLargeur(), y+obtenirHauteur());
 		
-		if(x == x1 && y == y1)
+		if(x != x1 && y != y1)
 			dessinerCadre(g, x, y);
 	}
 

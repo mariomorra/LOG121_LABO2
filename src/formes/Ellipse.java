@@ -67,7 +67,7 @@ public class Ellipse extends Forme {
 		g.setColor(Color.BLACK);
 		g.drawOval(x, y, rayonH, rayonV);
 		
-		if(x == centreX && y == centreY)
+		if(x != centreX && y != centreY)
 			dessinerCadre(g, x, y);
 
 
