@@ -95,7 +95,6 @@ public class MenuFenetre extends JMenuBar{
 		demarrerMenuItem.addActionListener(new ActionListener(){
 		  public void actionPerformed(ActionEvent arg0) {
 			comm.start();
-			rafraichirMenus();
 		  }
 		});
 		demarrerMenuItem.setAccelerator(KeyStroke.getKeyStroke(
@@ -164,8 +163,8 @@ public class MenuFenetre extends JMenuBar{
 	 *  Activer ou d??sactiver les items du menu selon la s??lection.
 	 */
 	private void rafraichirMenus() {
-		demarrerMenuItem.setEnabled(comm.isActif());
-		arreterMenuItem.setEnabled(!comm.isActif());
+		demarrerMenuItem.setEnabled(!comm.isActif());
+		arreterMenuItem.setEnabled(comm.isActif());
 	}
 
 	/**
