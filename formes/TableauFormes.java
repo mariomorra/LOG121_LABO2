@@ -74,37 +74,37 @@ public class TableauFormes {
 			teteListeModifiee = (Forme) teteListeOriginale.clone();
 			Forme indexClonage = teteListeModifiee;
 			while(indexClonage.obtenirFormeSuivante() != null){
-				indexClonage.assignerFormeSuivante(indexClonage.obtenirFormeSuivante().clone());
-				indexClonage = indexClonage.obtenirFormeSuivante();
+				Forme suiv = indexClonage.obtenirFormeSuivante().clone();
+				indexClonage.assignerFormeSuivante(suiv);
+				suiv.assignerFormePrecedente(indexClonage);
+				indexClonage = suiv;
 			}
 		} catch (CloneNotSupportedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
 		Forme teteDeTri = teteListeModifiee;
 		boolean triTermine = false;
 
 		try{
-			System.out.println("Starting bubble sort");
 			while(!triTermine){
 			 	triTermine = true;
-				System.out.println("--- starting another pass");
+				teteDeTri = teteListeModifiee;
 				while(teteDeTri != null){
-					System.out.println("--- --- checking " + teteDeTri.obtenirNseq() + " and " + teteDeTri.obtenirFormeSuivante().obtenirNseq());
 					if(teteDeTri.obtenirFormeSuivante() !=null && comparator.compare(teteDeTri, teteDeTri.obtenirFormeSuivante()) > 0){
-						System.out.println("--- --- --- Swapping");
 						echangerAvecSuivant(teteDeTri);
 						triTermine = false;
 					}else teteDeTri = teteDeTri.obtenirFormeSuivante();
 				}
-				teteDeTri = teteListeModifiee;
 			}
 		} catch(Exception e){
-			trie = true;
+			e.printStackTrace();
 			return -1;
 		}
 		
 		//retrouver la tete de la liste
+		teteDeTri = teteListeModifiee;
 		while(teteDeTri.obtenirFormePrecedente() != null){
 			teteDeTri = teteDeTri.obtenirFormePrecedente();
 		}
@@ -122,7 +122,9 @@ public class TableauFormes {
 				Forme prec = noeud.obtenirFormePrecedente();
 				prec.assignerFormeSuivante(suivant);
 				suivant.assignerFormePrecedente(prec);
-			}
+			}else{
+				suivant.assignerFormePrecedente(null);
+		 	}
 			
 			Forme apresSuivant = suivant.obtenirFormeSuivante();
 			
@@ -131,13 +133,13 @@ public class TableauFormes {
 				apresSuivant.assignerFormePrecedente(noeud);
 			}else{
 				noeud.assignerFormeSuivante(null);
-		 			}
-			
-		 			noeud.assignerFormePrecedente(suivant);
-		 			suivant.assignerFormeSuivante(noeud);
-			
-		 		}
 		 	}
+			
+ 			noeud.assignerFormePrecedente(suivant);
+ 			suivant.assignerFormeSuivante(noeud);
+	
+ 		}
+	}
 
 
 	public Forme debut(){
@@ -147,6 +149,10 @@ public class TableauFormes {
 
 	public boolean estTrie() {
 		return trie;
+	}
+
+	public void remettreANeuf() {
+		trie = false;
 	}
 
 }

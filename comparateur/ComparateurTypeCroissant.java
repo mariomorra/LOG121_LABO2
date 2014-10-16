@@ -19,7 +19,7 @@ public class ComparateurTypeCroissant extends ComparateurForme {
 		return 0;
 	}
 	
-	private int getTypeOrder(Object o){
+	private int getTypeOrder(Forme o){
 		
 		if(o.getClass() == Carre.class){
 			return 1;

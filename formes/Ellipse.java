@@ -49,11 +49,11 @@ public class Ellipse extends Forme {
 	}
 
 	public int obtenirHauteur(){
-		return rayonV;
+		return rayonV*2;
 	};
 
 	public int obtenirLargeur(){
-		return rayonH;
+		return rayonH*2;
 	}
 
 	public void dessinerForme(Graphics g) {
@@ -63,9 +63,9 @@ public class Ellipse extends Forme {
 	public void dessinerForme(Graphics g, int x, int y) {
 
 		g.setColor(couleur);
-		g.fillOval(x, y, rayonH, rayonV);
+		g.fillOval(x, y, obtenirLargeur(), obtenirHauteur());
 		g.setColor(Color.BLACK);
-		g.drawOval(x, y, rayonH, rayonV);
+		g.drawOval(x, y, obtenirLargeur(), obtenirHauteur());
 		
 		if(x != centreX && y != centreY)
 			dessinerCadre(g, x, y);
@@ -74,11 +74,11 @@ public class Ellipse extends Forme {
 	}
 
 	public double obtenirDiagonale() {
-		return Math.max(rayonV, rayonH)*2;
+		return Math.max(rayonV, rayonH);
 	}
 
 	public double obtenirAire() {
-		return (int) (Math.PI * rayonV * rayonH);
+		return Math.PI * rayonV * rayonH;
 	}
 
 

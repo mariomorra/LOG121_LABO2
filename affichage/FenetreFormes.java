@@ -37,6 +37,10 @@ import comparateur.ComparateurAireCroissant;
 import comparateur.ComparateurAireDecroissant;
 import comparateur.ComparateurDiagonaleCroissant;
 import comparateur.ComparateurForme;
+import comparateur.ComparateurHauteurCroissant;
+import comparateur.ComparateurHauteurDecroissant;
+import comparateur.ComparateurLargeurCroissant;
+import comparateur.ComparateurLargeurDecroissant;
 import comparateur.ComparateurNumSeqCroissant;
 import comparateur.ComparateurNumSeqDecroissant;
 import comparateur.ComparateurTypeCroissant;
@@ -76,15 +80,12 @@ public class FenetreFormes extends JComponent{
 		int i = 0;
 		Forme formeActuelle = formesList.debut();
 		while(formeActuelle != null){
-			System.out.println(formesList.estTrie());
-			if(formesList.estTrie()) {
-				System.out.println("X : " + i*offsetX + ", Y : " + i*offsetY);
-				formeActuelle.dessinerForme(g, i*offsetX, i*offsetY);
-			}
-			else
-				formeActuelle.dessinerForme(g);
-			formeActuelle = formeActuelle.obtenirFormeSuivante();
 			i++;
+			if(formesList.estTrie()) {
+				formeActuelle.dessinerForme(g, i*offsetX, i*offsetY);
+			} else formeActuelle.dessinerForme(g);
+			
+			formeActuelle = formeActuelle.obtenirFormeSuivante();
 		}
 		
 	}
@@ -107,7 +108,7 @@ public class FenetreFormes extends JComponent{
 	}
 	
 	public void firePropertyChange(String type, Object nouveau, Object vieux){
-		ComparateurForme comparator;
+		ComparateurForme comparator = null;
 		switch(type){
 			case "NseqCroissant":
 				comparator = new ComparateurNumSeqCroissant();
@@ -137,10 +138,28 @@ public class FenetreFormes extends JComponent{
 				comparator = new ComparateurDiagonaleCroissant();
 				break;
 				
-			default :
-				return;
+			case "HauteurCroissant" :
+				comparator = new ComparateurHauteurCroissant();
+				break;
+				
+			case "HauteurDecroissant" :
+				comparator = new ComparateurHauteurDecroissant();
+				break;
+				
+			case "LargeurCroissant" :
+				comparator = new ComparateurLargeurCroissant();
+				break;
+				
+			case "LargeurDecroissant" :
+				comparator = new ComparateurLargeurDecroissant();
+				break;
+				
+			case "Normal" :
+				formesList.remettreANeuf();
+				break;
+			default : return;
 		}
-		formesList.trier(comparator);
+		if(comparator != null) formesList.trier(comparator);
 		repaint();
 	}
 }

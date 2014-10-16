@@ -189,7 +189,7 @@ public class MenuFenetre extends JMenuBar{
 		JRadioButtonMenuItem MENU_TRI_AIRCROISSANT = new JRadioButtonMenuItem("Aire de forme (croissant)");
 		JRadioButtonMenuItem MENU_TRI_AIRDECROISSANT = new JRadioButtonMenuItem("Aire de forme (decroissant)");
 		JRadioButtonMenuItem MENU_TRI_TYPEFORMEA = new JRadioButtonMenuItem("Type de forme (Carre, Rectangle, Cercle, Ovale, Ligne)");
-		JRadioButtonMenuItem MENU_TRI_TYPEFORMEB = new JRadioButtonMenuItem("Air de forme (Ligne, Ovale, Cercle, Rectangle, Carre)");
+		JRadioButtonMenuItem MENU_TRI_TYPEFORMEB = new JRadioButtonMenuItem("Type de forme (Ligne, Ovale, Cercle, Rectangle, Carre)");
 		JRadioButtonMenuItem MENU_TRI_DISTANCE = new JRadioButtonMenuItem("Distance (croissante)");
 		JRadioButtonMenuItem MENU_TRI_HAUTEURA = new JRadioButtonMenuItem("Hauteur (croissante)");
 		JRadioButtonMenuItem MENU_TRI_HAUTEURB = new JRadioButtonMenuItem("Hauteur (decroissante)");
@@ -309,6 +309,14 @@ public class MenuFenetre extends JMenuBar{
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Tri Largeur (Decroissant)");
 				comm.firePropertyChange("TRI", null, "LargeurDecroissant");
+			}
+		});
+
+		// Remise au normal
+		menu.getItem(11).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Normal");
+				comm.firePropertyChange("TRI", null, "Normal");
 			}
 		});
 

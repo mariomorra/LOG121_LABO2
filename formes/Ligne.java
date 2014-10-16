@@ -55,22 +55,18 @@ public class Ligne extends Forme {
 		return y2;
 	}
 
-	@Override
 	public int obtenirHauteur() {
-		return y2-y1;
+		return Math.abs(y2-y1);
 	}
 
-	@Override
 	public int obtenirLargeur() {
-		return x2-x1;
+		return Math.abs(x2-x1);
 	}
 
-	@Override
 	public void dessinerForme(Graphics g) {
 		dessinerForme(g, x1, y1);
 	}
 
-	@Override
 	public void dessinerForme(Graphics g, int x, int y) {
 		g.setColor(couleur);
 		g.drawLine(x, y, x+obtenirLargeur(), y+obtenirHauteur());
@@ -78,13 +74,13 @@ public class Ligne extends Forme {
 			dessinerCadre(g, x, y);
 	}
 
-	@Override
 	public double obtenirDiagonale() {
 		return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
 	}
 
-	@Override
 	public double obtenirAire() {
-		return obtenirDiagonale();
+		// si on compte l'aire que ca occupe en pixels...
+		return Math.max(obtenirLargeur(), obtenirHauteur());
+		//return obtenirDiagonale();
 	}
 }
