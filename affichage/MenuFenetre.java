@@ -186,8 +186,8 @@ public class MenuFenetre extends JMenuBar{
 		
 		JRadioButtonMenuItem MENU_TRI_NUMSEQCROISSANT = new JRadioButtonMenuItem("Numero Sequence (Croissant)");
 		JRadioButtonMenuItem MENU_TRI_NUMSEQDECROISSANT = new JRadioButtonMenuItem("Numero de sequence (decroissant)");
-		JRadioButtonMenuItem MENU_TRI_AIRCROISSANT = new JRadioButtonMenuItem("Air de forme (croissant)");
-		JRadioButtonMenuItem MENU_TRI_AIRDECROISSANT = new JRadioButtonMenuItem("Air de forme (decroissant)");
+		JRadioButtonMenuItem MENU_TRI_AIRCROISSANT = new JRadioButtonMenuItem("Aire de forme (croissant)");
+		JRadioButtonMenuItem MENU_TRI_AIRDECROISSANT = new JRadioButtonMenuItem("Aire de forme (decroissant)");
 		JRadioButtonMenuItem MENU_TRI_TYPEFORMEA = new JRadioButtonMenuItem("Type de forme (Carre, Rectangle, Cercle, Ovale, Ligne)");
 		JRadioButtonMenuItem MENU_TRI_TYPEFORMEB = new JRadioButtonMenuItem("Air de forme (Ligne, Ovale, Cercle, Rectangle, Carre)");
 		JRadioButtonMenuItem MENU_TRI_DISTANCE = new JRadioButtonMenuItem("Distance (croissante)");
@@ -272,46 +272,45 @@ public class MenuFenetre extends JMenuBar{
 			}
 		});
 
-		// Tri Distance
+		// Tri Diagonale Croissant
 		menu.getItem(6).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Tri Distance (Croissant)");
+				System.out.println("Tri Diagnonale (Croissant)");
 				comm.firePropertyChange("TRI", null, "DiagonaleCroissant");
 			}
 		});
 
-		// Tri Distance
+		// Tri Hauteur Croissant
 		menu.getItem(7).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Tri Distance (Croissant)");
+				System.out.println("Tri Hauteur (Croissant)");
 				comm.firePropertyChange("TRI", null, "HauteurCroissant");
 			}
 		});
 
-		// Tri Distance
+		// Tri Hauteur Decroissant
 		menu.getItem(8).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Tri Distance (Croissant)");
+				System.out.println("Tri Hauteur (DeCroissant)");
 				comm.firePropertyChange("TRI", null, "HauteurDecroissant");
 			}
 		});
 
-		// Tri Distance
+		// Tri Largeur croissant
 		menu.getItem(9).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Tri Distance (Croissant)");
+				System.out.println("Tri Largeur (Croissant)");
 				comm.firePropertyChange("TRI", null, "LargeurCroissant");
 			}
 		});
 
-		// Tri Distance
+		// Tri Largeur decroissant
 		menu.getItem(10).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Tri Distance (Croissant)");
+				System.out.println("Tri Largeur (Decroissant)");
 				comm.firePropertyChange("TRI", null, "LargeurDecroissant");
 			}
 		});
-
 
 		add(menu);
 	}

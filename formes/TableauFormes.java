@@ -88,14 +88,12 @@ public class TableauFormes {
 						echangerAvecSuivant(f);
 						f = f.obtenirFormeSuivante();
 					} else {
-						if(f.obtenirFormeSuivante() != null)
-							f = f.obtenirFormeSuivante();
-						else{triTermine = true;}
+						f = f.obtenirFormeSuivante();
 					}
 				}
 			} while (triTermine == false);
 		} catch(Exception e){return -1;}
-		if(triTermine = true){return 1;}
+		if(triTermine == true){trie = true; return 1;}
 		trie = true;
 		return 0;
 
