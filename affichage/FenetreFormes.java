@@ -56,8 +56,8 @@ public class FenetreFormes extends JComponent{
 	public static final int HEIGHT = 500;
 	public static final Dimension dimension = new Dimension(500,500);
 	
-	private final int offsetX = 80;
-	private final int offsetY = 50;
+	private final int offsetX = 40;
+	private final int offsetY = 40;
 	
 	private TableauFormes formesList;
 	
@@ -144,5 +144,7 @@ public class FenetreFormes extends JComponent{
 			default :
 				return;
 		}
+		paintComponent(this.getGraphics());
+		repaint();
 	}
 }

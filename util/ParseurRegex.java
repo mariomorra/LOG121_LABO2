@@ -42,12 +42,11 @@ public abstract class ParseurRegex {
 	 * @return chaine standardis?e d?crivant une forme
 	 */
 	public static String getDescription(String in){
-		String descriptionForme = "";
+		String descriptionForme = in.split("\\ ")[0];
 		String[] trouvailles = genericMatch("^\\d+ <([a-zA-Z]+)> ([0-9\\ \\.]+) ?</[a-zA-Z]+>", in);
-		
 		for(int i = 0; i<trouvailles.length; i++){
-			if(i>0) descriptionForme += " ";
-			descriptionForme += trouvailles[i];
+			descriptionForme += " " + trouvailles[i];
+
 		}
 		
 		return descriptionForme; 
@@ -69,7 +68,7 @@ public abstract class ParseurRegex {
 	 */
 	public static int[] getMeasurementsFromDescription(String in){
 		
-		String[] temp = genericMatch("^[a-zA-Z]+ ([\\d\\ \\.]+)\\ $", in)[0].split("\\ ");
+		String[] temp = genericMatch("^\\d+ [a-zA-Z]+ ([\\d\\ \\.]+)\\ $", in)[0].split("\\ ");
 		int[] mesurements = new int[temp.length];
 		
 		for(int i = 0; i<temp.length; i++){
@@ -102,6 +101,6 @@ public abstract class ParseurRegex {
 	}
 
 	public static String getShapeFromDescription(String descriptionForme) {
-		return descriptionForme.split("\\ ")[0];
+		return descriptionForme.split("\\ ")[1];
 	}
 }

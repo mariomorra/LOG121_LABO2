@@ -34,9 +34,8 @@ public abstract class UsineFormes {
 	 * @return: nouvelle forme selon les sp??cifications, ou null si la forme n'a pas pu ??tre pars??e
 	 */
 	public static Forme genereForme(String descriptionForme){
-
 		Forme chose = null;
-		int nseq = 0000; //ParseurRegex.getUidFromString(descriptionForme);
+		int nseq = ParseurRegex.getUidFromString(descriptionForme);
 		int[] mesures = ParseurRegex.getMeasurementsFromDescription(descriptionForme);
 		switch(ParseurRegex.getShapeFromDescription(descriptionForme)){
 			case "RECTANGLE":

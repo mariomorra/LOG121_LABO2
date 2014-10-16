@@ -18,6 +18,8 @@ Historique des modifications
 
 package formes;
 
+import java.awt.Graphics;
+
 import comparateur.ComparateurForme;
 
 public class TableauFormes {
@@ -77,7 +79,6 @@ public class TableauFormes {
 		}
 
 		Forme f = teteListeModifiee;
-
 		try{
 			do{
 				triTermine = true;
@@ -86,11 +87,14 @@ public class TableauFormes {
 						triTermine = false;
 						echangerAvecSuivant(f);
 						f = f.obtenirFormeSuivante();
+					} else {
+						if(f.obtenirFormeSuivante() != null)
+							f = f.obtenirFormeSuivante();
+						else{triTermine = true;}
 					}
 				}
 			} while (triTermine == false);
 		} catch(Exception e){return -1;}
-
 		if(triTermine = true){return 1;}
 		trie = true;
 		return 0;
@@ -124,8 +128,5 @@ public class TableauFormes {
 	public boolean estTrie() {
 		return trie;
 	}
-
-
-
 
 }

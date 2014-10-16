@@ -76,7 +76,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 			String formeString = (String) arg0.getNewValue();
 			
 			if(formeString != null){
-				System.out.println("adding: "+ formeString);
+				System.out.println("adding : " + formeString);
 				fenetreFormes.ajout(UsineFormes.genereForme(ParseurRegex.getDescription(formeString)));
 			}
 			
