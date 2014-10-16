@@ -88,7 +88,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 			}
 			
 		}else if(arg0.getPropertyName().equals("TRI")){
-			System.out.println(arg0.getNewValue());
+			fenetreFormes.firePropertyChange(arg0.getOldValue().toString(), null, null);
 		}
 	}
 

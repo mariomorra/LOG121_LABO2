@@ -28,9 +28,19 @@ Historique des modifications
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.beans.PropertyChangeEvent;
+import java.util.Comparator;
+import java.util.ListIterator;
 
 import javax.swing.JComponent;
 
+import comparateur.ComparateurAireCroissant;
+import comparateur.ComparateurAireDecroissant;
+import comparateur.ComparateurDiagonaleCroissant;
+import comparateur.ComparateurForme;
+import comparateur.ComparateurNumSeqCroissant;
+import comparateur.ComparateurNumSeqDecroissant;
+import comparateur.ComparateurTypeCroissant;
+import comparateur.ComparateurTypeDecroissant;
 import formes.Forme;
 import formes.TableauFormes;
 
@@ -94,28 +104,62 @@ public class FenetreFormes extends JComponent{
 	}
 	
 	public void firePropertyChange(String type, Object nouveau, Object vieux){
+		ComparateurForme comparator;
 		switch(type){
 			case "NseqCroissant":
-				
+				comparator = new ComparateurNumSeqCroissant();
+				Forme formeActuelle = formesList.debut();
+				while(formeActuelle != null){
+					if(formeActuelle.obtenirFormeSuivante() != null) {
+						comparator.compare(formeActuelle, formeActuelle.obtenirFormeSuivante());
+						System.out.println(formeActuelle.toString());
+					}
+					formeActuelle = formeActuelle.obtenirFormeSuivante();
+					formesList.trier(comparator);
+				}
+				System.out.println("done");
 				break;
 			
 			case "NseqDecroissant" :
-				
+				comparator = new ComparateurNumSeqDecroissant();
+				formesList.trier(comparator);
+				System.out.println(formesList.toString());
+				System.out.println("done");
 				break;
 			
 			case "AireCroissant":
+				comparator = new ComparateurAireCroissant();
+				formesList.trier(comparator);
+				System.out.println(formesList.toString());
+				System.out.println("done");
 				break;
 			
 			case "AireDecroissant" :
+				comparator = new ComparateurAireDecroissant();
+				formesList.trier(comparator);
+				System.out.println(formesList.toString());
+				System.out.println("done");
 				break;
 			
 			case "FormeCroissant" :
+				comparator = new ComparateurTypeCroissant();
+				formesList.trier(comparator);
+				System.out.println(formesList.toString());
+				System.out.println("done");
 				break;
 				
 			case "FormeDecroissant" :
+				comparator = new ComparateurTypeDecroissant();
+				formesList.trier(comparator);
+				System.out.println(formesList.toString());
+				System.out.println("done");
 				break;
 				
 			case "DiagonaleCroissant" :
+				comparator = new ComparateurDiagonaleCroissant();
+				formesList.trier(comparator);
+				System.out.println(formesList.toString());
+				System.out.println("done");
 				break;
 				
 			default :

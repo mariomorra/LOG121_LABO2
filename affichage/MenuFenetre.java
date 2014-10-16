@@ -198,6 +198,20 @@ public class MenuFenetre extends JMenuBar{
 		JRadioButtonMenuItem MENU_TRI_LARGEURB = new JRadioButtonMenuItem("Largeur (decroissante)");
 		JRadioButtonMenuItem MENU_TRI_NORMAL = new JRadioButtonMenuItem("Normal");
 		
+		groupTri.add(MENU_TRI_NUMSEQCROISSANT);
+		groupTri.add(MENU_TRI_NUMSEQDECROISSANT);
+		groupTri.add(MENU_TRI_AIRCROISSANT);
+		groupTri.add(MENU_TRI_AIRDECROISSANT);
+		groupTri.add(MENU_TRI_TYPEFORMEA);
+		groupTri.add(MENU_TRI_TYPEFORMEB);
+		groupTri.add(MENU_TRI_DISTANCE);
+		groupTri.add(MENU_TRI_HAUTEURA);
+		groupTri.add(MENU_TRI_HAUTEURB);
+		groupTri.add(MENU_TRI_LARGEURA);
+		groupTri.add(MENU_TRI_LARGEURB);
+		groupTri.add(MENU_TRI_NORMAL);
+		
+		
 		menu.add(MENU_TRI_NUMSEQCROISSANT);
 		menu.add(MENU_TRI_NUMSEQDECROISSANT);
 		menu.add(MENU_TRI_AIRCROISSANT);
