@@ -80,14 +80,13 @@ public class FenetreFormes extends JComponent{
 		int i = 0;
 		Forme formeActuelle = formesList.debut();
 		while(formeActuelle != null){
-			i++;
 			if(formesList.estTrie()) {
 				formeActuelle.dessinerForme(g, i*offsetX, i*offsetY);
 			} else formeActuelle.dessinerForme(g);
-			
+			i++;
 			formeActuelle = formeActuelle.obtenirFormeSuivante();
 		}
-		
+		formesList.setTrie(false);
 	}
 	
 	/**

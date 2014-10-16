@@ -37,6 +37,11 @@ public class TableauFormes {
 	public TableauFormes() {
 		teteListeOriginale = null;
 		teteListeModifiee = null;
+		trie = false;
+	}
+	
+	public void setTrie(boolean trie) {
+		this.trie = trie;
 	}
 
 	private int nbFormes(){
