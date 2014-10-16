@@ -76,6 +76,7 @@ public class TableauFormes {
 	public int trier(ComparateurForme comparator) {
 	
 		try {
+			// cree une copie de la liste
 			teteListeModifiee = (Forme) teteListeOriginale.clone();
 			Forme indexClonage = teteListeModifiee;
 			while(indexClonage.obtenirFormeSuivante() != null){
@@ -96,6 +97,9 @@ public class TableauFormes {
 			while(!triTermine){
 			 	triTermine = true;
 				teteDeTri = teteListeModifiee;
+				while(teteDeTri.obtenirFormePrecedente()!=null){
+					teteDeTri = teteDeTri.obtenirFormePrecedente();
+				}
 				while(teteDeTri != null){
 					if(teteDeTri.obtenirFormeSuivante() !=null && comparator.compare(teteDeTri, teteDeTri.obtenirFormeSuivante()) > 0){
 						echangerAvecSuivant(teteDeTri);
