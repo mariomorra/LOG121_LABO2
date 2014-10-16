@@ -5,22 +5,6 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Exercice 1
 
-<<<<<<< Updated upstream
-???tudiant(e)(s) :	Kolytchev, Dmitri
-=======
-<<<<<<< HEAD
-???tudiant(e)(s) :	Kolytchev, Dmitri
->>>>>>> Stashed changes
-Code(s) perm. :		KOLD15088804
-
-Professeur :		Ghizlane El boussaidi
-Charg???s de labo.:	Alvine Boaye Belle et Michel Gagnon
-Nom du fichier: 	CommBase.java
-<<<<<<< Updated upstream
-Date cr???e :			2013-05-03
-=======
-Date cr???e :			2013-05-03
-=======
 ???tudiant(e)(s) :	Kolytchev, Dmitri
 Code(s) perm. :		KOLD15088804
 
@@ -28,8 +12,13 @@ Professeur :		Ghizlane El boussaidi
 Charg???s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier: 	CommBase.java
 Date cr???e :			2013-05-03
->>>>>>> pr/1
->>>>>>> Stashed changes
+???tudiant(e)(s) :	Kolytchev, Dmitri
+Code(s) perm. :		KOLD15088804
+
+Professeur :		Ghizlane El boussaidi
+Charg???s de labo.:	Alvine Boaye Belle et Michel Gagnon
+Nom du fichier: 	CommBase.java
+Date cr???e :			2013-05-03
 Date dern. modif.	2014-09-17
 *******************************************************
 Historique des modifications
@@ -82,7 +71,6 @@ public class CommBase{
 	}
 
 	/**
-<<<<<<< Updated upstream
 	 * D???finir le r???cepteur de l'information re???ue dans la communication avec le serveur
 	 * @param listener sera alert??? lors de l'appel de "firePropertyChanger" par le SwingWorker
 	 */
