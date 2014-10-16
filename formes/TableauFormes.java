@@ -70,51 +70,60 @@ public class TableauFormes {
 
 	public int trier(ComparateurForme comparator) {
 
-		boolean triTermine;
+		teteListeModifiee = (Forme) teteListeOriginale;
 
-		try {
-			teteListeModifiee = (Forme) teteListeOriginale.clone();
-		} catch (CloneNotSupportedException e) {
-
+		try{
+			
+			Forme teteDeTri = teteListeModifiee;
+			boolean triTermine = false;
+			
+			System.out.println("Starting bubble sort");
+			while(!triTermine){
+				triTermine = true;
+				System.out.println("--- starting another pass");
+				while(teteDeTri != null){
+					System.out.println("--- --- checking " + teteDeTri.obtenirNseq() + " and " + teteDeTri.obtenirFormeSuivante().obtenirNseq());
+					if(teteDeTri.obtenirFormeSuivante() !=null && comparator.compare(teteDeTri, teteDeTri.obtenirFormeSuivante()) > 0){
+						System.out.println("--- --- --- Swapping");
+						echangerAvecSuivant(teteDeTri);
+						triTermine = false;
+					}else teteDeTri = teteDeTri.obtenirFormeSuivante();
+				}
+				teteDeTri = teteListeModifiee;
+			}
+			
+		} catch(Exception e){
+			return -1;
 		}
 
-		Forme f = teteListeModifiee;
-		try{
-			do{
-				triTermine = true;
-				for(int i = 0; i < NB_MAX_FORMES; i++){
-					if(comparator.compare(f, f.obtenirFormeSuivante()) > 0){
-						triTermine = false;
-						echangerAvecSuivant(f);
-						f = f.obtenirFormeSuivante();
-					} else {
-						f = f.obtenirFormeSuivante();
-					}
-				}
-			} while (triTermine == false);
-		} catch(Exception e){return -1;}
-		if(triTermine == true){trie = true; return 1;}
 		trie = true;
-		return 0;
+		
+		return 1;
 
 	}
 
-	private void echangerAvecSuivant(Forme f){
-		Forme noeud = f;
-		Forme suivant = f.obtenirFormeSuivante();
+	private void echangerAvecSuivant(Forme noeud){
+		Forme suivant = noeud.obtenirFormeSuivante();
 		if(suivant != null){
+			
 			if(!noeud.estTete()){
 				Forme prec = noeud.obtenirFormePrecedente();
 				prec.assignerFormeSuivante(suivant);
 				suivant.assignerFormePrecedente(prec);
 			}
+			
 			Forme apresSuivant = suivant.obtenirFormeSuivante();
+			
 			if(apresSuivant != null){
 				noeud.assignerFormeSuivante(apresSuivant);
 				apresSuivant.assignerFormePrecedente(noeud);
+			}else{
+				noeud.assignerFormeSuivante(null);
 			}
+			
 			noeud.assignerFormePrecedente(suivant);
 			suivant.assignerFormeSuivante(noeud);
+			
 		}
 	}
 

@@ -111,43 +111,36 @@ public class FenetreFormes extends JComponent{
 		switch(type){
 			case "NseqCroissant":
 				comparator = new ComparateurNumSeqCroissant();
-				formesList.trier(comparator);
 				break;
 			
 			case "NseqDecroissant" :
 				comparator = new ComparateurNumSeqDecroissant();
-				formesList.trier(comparator);
 				break;
 			
 			case "AireCroissant":
 				comparator = new ComparateurAireCroissant();
-				formesList.trier(comparator);
 				break;
 			
 			case "AireDecroissant" :
 				comparator = new ComparateurAireDecroissant();
-				formesList.trier(comparator);
 				break;
 			
 			case "FormeCroissant" :
 				comparator = new ComparateurTypeCroissant();
-				formesList.trier(comparator);
 				break;
 				
 			case "FormeDecroissant" :
 				comparator = new ComparateurTypeDecroissant();
-				formesList.trier(comparator);
 				break;
 				
 			case "DiagonaleCroissant" :
 				comparator = new ComparateurDiagonaleCroissant();
-				formesList.trier(comparator);
 				break;
 				
 			default :
 				return;
 		}
-		paintComponent(this.getGraphics());
+		formesList.trier(comparator);
 		repaint();
 	}
 }

@@ -94,7 +94,7 @@ public class CommBase{
 	 * D???marre la communication
 	 */
 	public void start(){
-		String query = JOptionPane.showInputDialog(null, "Veuillez sp???cifier le serveur et le port", "serveur:port");
+		String query = JOptionPane.showInputDialog(null, "Veuillez sp???cifier le serveur et le port", "localhost:10000");
 		if(query == null || query.isEmpty())
 			return; // cancellation utilisateur
 		else if(query.matches("^[a-zA-Z0-9\\.\\-\\_]+:[0-9]+$") == false){
