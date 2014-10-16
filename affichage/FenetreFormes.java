@@ -141,6 +141,6 @@ public class FenetreFormes extends JComponent{
 				return;
 		}
 		formesList.trier(comparator);
-		paintComponent(this.getGraphics());
+		repaint();
 	}
 }
