@@ -71,11 +71,10 @@ public class TableauFormes {
 	public int trier(ComparateurForme comparator) {
 
 		teteListeModifiee = (Forme) teteListeOriginale;
+		Forme teteDeTri = teteListeModifiee;
+		boolean triTermine = false;
 
 		try{
-			
-			Forme teteDeTri = teteListeModifiee;
-			boolean triTermine = false;
 			
 			System.out.println("Starting bubble sort");
 			while(!triTermine){
@@ -95,7 +94,14 @@ public class TableauFormes {
 		} catch(Exception e){
 			return -1;
 		}
-
+		
+		//retrouver la tete de la liste
+		while(teteDeTri.obtenirFormePrecedente() != null){
+			teteDeTri = teteDeTri.obtenirFormePrecedente();
+		}
+		
+		teteListeModifiee = teteDeTri;
+		
 		trie = true;
 		
 		return 1;
