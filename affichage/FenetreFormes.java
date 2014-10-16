@@ -76,8 +76,8 @@ public class FenetreFormes extends JComponent{
 		int i = 0;
 		Forme formeActuelle = formesList.debut();
 		while(formeActuelle != null){
+			System.out.println(formesList.estTrie());
 			if(formesList.estTrie()) {
-				formeActuelle.toString();
 				System.out.println("X : " + i*offsetX + ", Y : " + i*offsetY);
 				formeActuelle.dessinerForme(g, i*offsetX, i*offsetY);
 			}
@@ -141,6 +141,6 @@ public class FenetreFormes extends JComponent{
 				return;
 		}
 		formesList.trier(comparator);
-		repaint();
+		paintComponent(this.getGraphics());
 	}
 }

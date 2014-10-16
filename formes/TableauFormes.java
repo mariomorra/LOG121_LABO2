@@ -69,17 +69,15 @@ public class TableauFormes {
 
 
 	public int trier(ComparateurForme comparator) {
-
+	
 		teteListeModifiee = (Forme) teteListeOriginale;
-
+	
 		try{
-			
 			Forme teteDeTri = teteListeModifiee;
 			boolean triTermine = false;
-			
 			System.out.println("Starting bubble sort");
 			while(!triTermine){
-				triTermine = true;
+			 	triTermine = true;
 				System.out.println("--- starting another pass");
 				while(teteDeTri != null){
 					System.out.println("--- --- checking " + teteDeTri.obtenirNseq() + " and " + teteDeTri.obtenirFormeSuivante().obtenirNseq());
@@ -91,17 +89,15 @@ public class TableauFormes {
 				}
 				teteDeTri = teteListeModifiee;
 			}
-			
 		} catch(Exception e){
+			trie = true;
 			return -1;
 		}
-
+		System.out.println("HERE");
 		trie = true;
-		
 		return 1;
-
 	}
-
+		 
 	private void echangerAvecSuivant(Forme noeud){
 		Forme suivant = noeud.obtenirFormeSuivante();
 		if(suivant != null){
@@ -119,13 +115,14 @@ public class TableauFormes {
 				apresSuivant.assignerFormePrecedente(noeud);
 			}else{
 				noeud.assignerFormeSuivante(null);
-			}
+		 			}
 			
-			noeud.assignerFormePrecedente(suivant);
-			suivant.assignerFormeSuivante(noeud);
+		 			noeud.assignerFormePrecedente(suivant);
+		 			suivant.assignerFormeSuivante(noeud);
 			
-		}
-	}
+		 		}
+		 	}
+
 
 	public Forme debut(){
 		return teteListeOriginale;
