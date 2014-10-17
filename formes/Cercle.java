@@ -4,13 +4,13 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Laboratoire 2
 
-Étudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
+ï¿½tudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
 Code(s) perm. :		KOLD15088804, MORM07039202, GIRA08059305
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Chargï¿½s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier :	Cercle.java
-Date crée :			2013-05-03
+Date crï¿½e :			2013-05-03
 Date dern. modif.	2014-10-16
 *******************************************************
 Historique des modifications
@@ -24,8 +24,8 @@ import java.awt.Color;
 
 public class Cercle extends Ellipse {
 
-	public Cercle(int nseq, int x, int y, int r) {
-		super(nseq, x, y, r, r);
+	public Cercle(final int noSequence, final int xCoord, final int yCoord, final int rayon) {
+		super(noSequence, xCoord, yCoord, rayon, rayon);
 		super.couleur = new Color(0xA60000FF, true);
 	}
 

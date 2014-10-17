@@ -4,13 +4,13 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Laboratoire 2
 
-Étudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
+ï¿½tudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
 Code(s) perm. :		KOLD15088804, MORM07039202, GIRA08059305
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Chargï¿½s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier :	LangueConfig.java
-Date crée :			2013-05-03
+Date crï¿½e :			2013-05-03
 Date dern. modif.	2014-10-16
 *******************************************************
 Historique des modifications
@@ -23,7 +23,7 @@ package util;
 import java.util.Locale;
 import java.util.ResourceBundle;	
 
-public abstract class LangueConfig {
+public abstract class AbstractLangueConfig {
 	
 	static private final String PREFS_BUNDLE_BASENAME = "prefs";
 	static private final String BUNDLE_BASENAME = "app", PREFERRED_LOCALE_KEY = "locale";
@@ -43,11 +43,11 @@ public abstract class LangueConfig {
 	         resources = ResourceBundle.getBundle(BUNDLE_BASENAME, locale);
 	      }
 	      catch(java.util.MissingResourceException ex) {
-	         System.err.println("ERROR: cannot find properties file for " + BUNDLE_BASENAME);
+	         System.err.println("ERROR: cannot find properties file for " + BUNDLE_BASENAME); // NOPMD by Alex on 16/10/14 10:01 PM
 	      }
 	   };
 
-	   public static String getResource(String key) {
+	   public static String getResource(final String key) {
 		      return (resources == null) ? null : resources.getString(key);
 	   }
 }

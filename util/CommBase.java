@@ -5,13 +5,13 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Laboratoire 2
 
-Étudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
+ï¿½tudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
 Code(s) perm. :		KOLD15088804, MORM07039202, GIRA08059305
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Chargï¿½s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier :	CommBase.java
-Date crée :			2013-05-03
+Date crï¿½e :			2013-05-03
 Date dern. modif.	2014-10-16
 *******************************************************
 Historique des modifications
@@ -24,8 +24,6 @@ Historique des modifications
 *******************************************************/
 
 
-
-import java.awt.Event;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
@@ -39,51 +37,43 @@ import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-import affichage.FenetrePrincipale;
-
 /**
  * Base d'une communication via un fil d'ex???cution parall???le.
  */
 public class CommBase{
 
-	private final int DELAI = 1000;
-	private SwingWorker threadComm =null;
-	private PropertyChangeListener listener = null;
-	private boolean isActif = false;
+	private transient SwingWorker threadComm;
+	private transient PropertyChangeListener listener;
+	private transient boolean isActif;
 
 
 
-	private Socket client;
-    private BufferedReader reponse;
-    private PrintWriter demande;
-
-	/**
-	 * Constructeur
-	 */
-	public CommBase(){
-	}
+	private transient Socket client;
+    private transient BufferedReader reponse;
+    private transient PrintWriter demande;
 
 	/**
-	 * Définir le récepteur de l'information reçue dans la communication avec le serveur
-	 * @param listener sera alerté lors de l'appel de "firePropertyChanger" par le SwingWorker
+	 * Dï¿½finir le rï¿½cepteur de l'information reï¿½ue dans la communication avec le serveur
+	 * @param listener sera alertï¿½ lors de l'appel de "firePropertyChanger" par le SwingWorker
 	 */
-	public void setPropertyChangeListener(PropertyChangeListener listener){
+	public void setPropertyChangeListener(final PropertyChangeListener listener){
 		this.listener = listener;
 	}
 
 	/**
-	 * Démarre la communication
+	 * Dï¿½marre la communication
 	 */
 	public void start(){
-		String query = JOptionPane.showInputDialog(null, "Veuillez spécifier le serveur et le port", "localhost:10000");
-		if(query == null || query.isEmpty())
+		final String query = JOptionPane.showInputDialog(null, "Veuillez spï¿½cifier le serveur et le port", "localhost:10000");
+		if(query == null || query.isEmpty()) {
 			return; // cancellation utilisateur
+		}
 		else if(query.matches("^[a-zA-Z0-9\\.\\-\\_]+:[0-9]+$") == false){
-			JOptionPane.showMessageDialog(null, "Veuillez vous assurer que l'addresse est sous la forme de \"serveur:port\"\n(le port doit être numérique)");
+			JOptionPane.showMessageDialog(null, "Veuillez vous assurer que l'addresse est sous la forme de \"serveur:port\"\n(le port doit ï¿½tre numï¿½rique)");
 			return;
 		}
 
-		String[] addresse = query.split(":");
+		final String[] addresse = query.split(":");
 
 		/*
 		 * Esseyer de se connecter au serveur. Si une erreur survient, notifier l'utilisateur.
@@ -94,27 +84,27 @@ public class CommBase{
 			client = new Socket(addresse[0], Integer.parseInt(addresse[1]));
 
 			/*=========================================================================================================
-			 * CODE EMPRUNTÉ:
-			 * les variables "reponse" et "demande" sont basées sur le code de ce tutoriel:
+			 * CODE EMPRUNTï¿½:
+			 * les variables "reponse" et "demande" sont basï¿½es sur le code de ce tutoriel:
 			 * http://docs.oracle.com/javase/tutorial/networking/sockets/readingWriting.html
-			 * J'ai utilisé les exemples de BufferedReader et PrintWriter pour réaliser la communication client-serveur
+			 * J'ai utilisï¿½ les exemples de BufferedReader et PrintWriter pour rï¿½aliser la communication client-serveur
 			 *=========================================================================================================*/
 			reponse = new BufferedReader(new InputStreamReader(client.getInputStream()));
 		    demande = new PrintWriter(client.getOutputStream(), true);
 		    /*
-		     * Fin du code emprunté.
+		     * Fin du code empruntï¿½.
 		     */
 
 			creerCommunication();
 
 		} catch (UnknownHostException e) {
-			// On réussit pas à trouver un serveur, notifier l'utilisateur.
-			JOptionPane.showMessageDialog(null, "Le serveur spécifié n'a pas pu être trouvé (vérifiez votre addresse)");
+			// On rï¿½ussit pas ï¿½ trouver un serveur, notifier l'utilisateur.
+			JOptionPane.showMessageDialog(null, "Le serveur spï¿½cifiï¿½ n'a pas pu ï¿½tre trouvï¿½ (vï¿½rifiez votre addresse)");
 			return;
 
 		} catch (ConnectException e) {
-			// On réussit pas à trouver un serveur, notifier l'utilisateur.
-			JOptionPane.showMessageDialog(null, "Le serveur spécifié a refusé la connexion (vérifiez le port spécifié)");
+			// On rï¿½ussit pas ï¿½ trouver un serveur, notifier l'utilisateur.
+			JOptionPane.showMessageDialog(null, "Le serveur spï¿½cifiï¿½ a refusï¿½ la connexion (vï¿½rifiez le port spï¿½cifiï¿½)");
 			return;
 
 		} catch (IOException e) {
@@ -125,20 +115,22 @@ public class CommBase{
 	}
 
 	/**
-	 * Arrête la communication et effectue une remise-à-zero pour pouvoir retenter une connexion ultérieure.
+	 * Arrï¿½te la communication et effectue une remise-ï¿½-zero pour pouvoir retenter une connexion ultï¿½rieure.
 	 */
 	public void stop(){
 
 		isActif = false;
 
 		try{
-			if(demande != null) demande.println("END");
+			if(demande != null) {
+				demande.println("END");
+			}
 			reponse.close();
 			demande.close();
 			client.close();
 
 		} catch(Exception e){
-			// quelques objets sont nuls, probablement parce que le serveur s'est déconnecté. Rien à faire ici.
+			// quelques objets sont nuls, probablement parce que le serveur s'est dï¿½connectï¿½. Rien ï¿½ faire ici.
 		}
 
 		reponse = null;
@@ -148,23 +140,23 @@ public class CommBase{
 	}
 
 	/**
-	 * Crée un processus parallèle qui s'occupera de la communication. Lance des évènements PropertyChange pour signaler son état.
+	 * Crï¿½e un processus parallï¿½le qui s'occupera de la communication. Lance des ï¿½vï¿½nements PropertyChange pour signaler son ï¿½tat.
 	 */
 	protected void creerCommunication(){		
-		// Crée un fil d'exécusion parallèle au fil courant,
+		// Crï¿½e un fil d'exï¿½cusion parallï¿½le au fil courant,
 		threadComm = new SwingWorker(){
 
 			@Override
 			protected Object doInBackground() throws Exception {
 				String shell = "";
-				while(isActif && shell != null){ // quand shell devient null, le serveur a quitté 
+				while(isActif && shell != null){ // quand shell devient null, le serveur a quittï¿½ 
 					try{
 						// C'EST DANS CETTE BOUCLE QU'ON COMMUNIQUE AVEC LE SERVEUR
 						shell = reponse.readLine();
 						for(int i = 0; i<10; i++){
 							if(shell != null && shell.equals("commande> ")){
 								demande.println("GET");
-			 					//La méthode suivante alerte l'observateur 
+			 					//La mï¿½thode suivante alerte l'observateur 
 								if(listener!=null){
 									firePropertyChange("FORME-CREE", null, (Object) reponse.readLine());
 									reponse.readLine();
@@ -186,22 +178,22 @@ public class CommBase{
 			}
 		};
 
-		if(listener!=null)
-			threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelèe lorsque le SwingWorker invoquera la méthode "firePropertyChanger"
-
-		threadComm.execute(); // Lance le fil d'exécution parallèle.
+		if(listener!=null) {
+			threadComm.addPropertyChangeListener(listener); // La mï¿½thode "propertyChange" de ApplicationFormes sera donc appelï¿½e lorsque le SwingWorker invoquera la mï¿½thode "firePropertyChanger"
+		}
+		threadComm.execute(); // Lance le fil d'exï¿½cution parallï¿½le.
 		isActif = true;
 	}
 
 	/**
-	 * @return si le fil d'exécution parallèle est actif
+	 * @return si le fil d'exï¿½cution parallï¿½le est actif
 	 */
 	public boolean isActif(){
 		return isActif;
 	}
 	
 	// Fonction permettant 
-	public void firePropertyChange(String type, Object typeTri){
+	public void firePropertyChange(final String type, final Object typeTri){
 		listener.propertyChange(new PropertyChangeEvent(this, "TRI", typeTri, null));
 	}
 }

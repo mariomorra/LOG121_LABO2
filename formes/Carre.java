@@ -4,13 +4,13 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Laboratoire 2
 
-Étudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
+ï¿½tudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
 Code(s) perm. :		KOLD15088804, MORM07039202, GIRA08059305
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Chargï¿½s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier :	Carre.java
-Date crée :			2013-05-03
+Date crï¿½e :			2013-05-03
 Date dern. modif.	2014-10-16
 *******************************************************
 Historique des modifications
@@ -28,8 +28,8 @@ import java.awt.Color;
 
 public class Carre extends Rectangle {
 
-	public Carre(int nseq, int x1, int y1, int x2, int y2) {
-		super(nseq, x1, y1, x2, y2);
+	public Carre(final int noSequence, final int xCoord1, final int yCoord1, final int xCoord2, final int yCoord2) {
+		super(noSequence, xCoord1, yCoord1, xCoord2, yCoord2);
 		super.couleur = new Color(0xA6FF8000, true);
 	}
 

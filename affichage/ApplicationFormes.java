@@ -38,8 +38,8 @@ public class ApplicationFormes{
 	 * main de l'application
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		@SuppressWarnings("unused")
+	public static void main(final String[] args) {
+		final @SuppressWarnings("unused")
 		ApplicationFormes application = new ApplicationFormes();
 	}
 	
@@ -47,8 +47,8 @@ public class ApplicationFormes{
 	 * Constructeur
 	 */
 	public ApplicationFormes(){
-		CommBase comm = new CommBase();
-		FenetrePrincipale fenetre = new FenetrePrincipale(comm);
+		final CommBase comm = new CommBase();
+		final FenetrePrincipale fenetre = new FenetrePrincipale(comm);
 		comm.setPropertyChangeListener(fenetre);
 	}
 }

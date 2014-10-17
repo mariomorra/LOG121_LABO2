@@ -35,7 +35,7 @@ import javax.swing.JOptionPane;
 
 import util.CommBase;
 import util.ParseurRegex;
-import formes.UsineFormes;
+import formes.AbstractUsineFormes;
 
 /**
  * Cette classe représente la fenêtre principale de l'application 
@@ -46,14 +46,15 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 	
 	private static final long serialVersionUID = -1210804336046370508L;
 
-	private MenuFenetre menu;
-	private CommBase communicateur;
-	private FenetreFormes fenetreFormes;
+	private transient final MenuFenetre menu;
+	private transient final CommBase communicateur;
+	private transient final FenetreFormes fenetreFormes;
 	
 	/**
 	 * Constructeur
 	 */
-	public FenetrePrincipale(CommBase comm){
+	public FenetrePrincipale(final CommBase comm){
+		super();
 		
 		communicateur = comm;
 		menu = new MenuFenetre(comm);
@@ -70,19 +71,18 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 	
 	// Appelé lorsque le sujet lance "firePropertyChanger"
 	@Override
-	public void propertyChange(PropertyChangeEvent arg0) {
+	public void propertyChange(final PropertyChangeEvent arg0) {
 		if(arg0.getPropertyName().equals("FORME-CREE"))	{
-			String formeString = (String) arg0.getNewValue();
+			final String formeString = (String) arg0.getNewValue();
 			menu.nettoyerMenuTrier();	// Enleve l'element selectionne de la liste de tri
 			
 			if(formeString != null){
-				System.out.println("adding : " + formeString);
 				//	Permet de creer la forme recu du serveur
-				fenetreFormes.ajout(UsineFormes.genereForme(ParseurRegex.getDescription(formeString)));
+				fenetreFormes.ajout(AbstractUsineFormes.genereForme(ParseurRegex.getDescription(formeString)));
 			}
 			
 		}else if(arg0.getPropertyName().equals("CONNEXION")){
-			String statusString = (String) arg0.getNewValue();
+			final String statusString = (String) arg0.getNewValue();
 			if(statusString != null && statusString.equals("END")){
 				JOptionPane.showMessageDialog(null, "Le serveur a d??connect?? de fa??on inattendue.");
 			}
@@ -93,42 +93,42 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 	}
 
 	@Override
-	public void windowClosing(WindowEvent arg0) {
+	public void windowClosing(final WindowEvent arg0) {
 		communicateur.stop();
 	}
 
 	@Override
-	public void windowClosed(WindowEvent arg0) {
+	public void windowClosed(final WindowEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void windowActivated(WindowEvent arg0) {
+	public void windowActivated(final WindowEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void windowDeactivated(WindowEvent arg0) {
+	public void windowDeactivated(final WindowEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void windowDeiconified(WindowEvent arg0) {
+	public void windowDeiconified(final WindowEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void windowIconified(WindowEvent arg0) {
+	public void windowIconified(final WindowEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void windowOpened(WindowEvent arg0) {
+	public void windowOpened(final WindowEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}

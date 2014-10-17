@@ -22,6 +22,7 @@ package com;
 
 public class FinalStrings {
 
-	public static final String HostNameAndServerRegex = ".*";
+	public static final String HOSTNAMEANDSERVERREGEX = ".*";
+	public static final String TRI = "TRI";
 
 }

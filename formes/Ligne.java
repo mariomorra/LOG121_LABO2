@@ -4,13 +4,13 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Laboratoire 2
 
-Étudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
+ï¿½tudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
 Code(s) perm. :		KOLD15088804, MORM07039202, GIRA08059305
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Chargï¿½s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier :	TableauFormes.java
-Date crée :			2013-05-03
+Date crï¿½e :			2013-05-03
 Date dern. modif.	2014-10-16
 *******************************************************
 Historique des modifications
@@ -23,59 +23,61 @@ package formes;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Ligne extends Forme {
+public class Ligne extends AbstractForme {
 
-	private int x1;
-	private int y1;
-	private int x2;
-	private int y2;
+	private final transient int xCoord1;
+	private final transient int yCoord1;
+	private final transient int xCoord2;
+	private final transient int yCoord2;
 
-	public Ligne(int nseq, int x1, int y1, int x2, int y2){
-		super.nseq = nseq;
+	public Ligne(final int noSequence, final int xCoord1, final int yCoord1, final int xCoord2, final int yCoord2){
+		super();
+		super.noSequence = noSequence;
 		super.couleur = Color.BLACK;
-		this.x1 = x1;
-		this.y1 = y1;
-		this.x2 = x2;
-		this.y2 = y2;
+		this.xCoord1 = xCoord1;
+		this.yCoord1 = yCoord1;
+		this.xCoord2 = xCoord2;
+		this.yCoord2 = yCoord2;
 	}
 
 	public int obtenirX(){
-		return x1;
+		return xCoord1;
 	}
 
 	public int obtenirY(){
-		return y1;
+		return yCoord1;
 	}
 
 	public int obtenirX2(){
-		return x2;
+		return xCoord2;
 	}
 
 	public int obtenirY2(){
-		return y2;
+		return yCoord2;
 	}
 
 	public int obtenirHauteur() {
-		return Math.abs(y2-y1);
+		return Math.abs(yCoord2-yCoord1);
 	}
 
 	public int obtenirLargeur() {
-		return Math.abs(x2-x1);
+		return Math.abs(xCoord2-xCoord1);
 	}
 
-	public void dessinerForme(Graphics g) {
-		dessinerForme(g, x1, y1);
+	public void dessinerForme(final Graphics graphique) {
+		dessinerForme(graphique, xCoord1, yCoord1);
 	}
 
-	public void dessinerForme(Graphics g, int x, int y) {
-		g.setColor(couleur);
-		g.drawLine(x, y, x+obtenirLargeur(), y+obtenirHauteur());
-		if(x != x1 && y != y1)
-			dessinerCadre(g, x, y);
+	public void dessinerForme(final Graphics graphique, final int xCoord, final int yCoord) {
+		graphique.setColor(couleur);
+		graphique.drawLine(xCoord, yCoord, xCoord+obtenirLargeur(), yCoord+obtenirHauteur());
+		if(xCoord != xCoord1 && yCoord != yCoord1) {
+			dessinerCadre(graphique, xCoord, yCoord);
+		}
 	}
 
 	public double obtenirDiagonale() {
-		return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+		return Math.sqrt(Math.pow(xCoord2-xCoord1, 2) + Math.pow(yCoord2-yCoord1, 2));
 	}
 
 	public double obtenirAire() {

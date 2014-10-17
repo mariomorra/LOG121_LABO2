@@ -4,13 +4,13 @@ Session :			Automne 2014
 Groupe :			01
 Projet :			Laboratoire 2
 
-Étudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
+ï¿½tudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
 Code(s) perm. :		KOLD15088804, MORM07039202, GIRA08059305
 
 Professeur :		Ghizlane El boussaidi
-Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Chargï¿½s de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier :	TableauFormes.java
-Date crée :			2013-05-03
+Date crï¿½e :			2013-05-03
 Date dern. modif.	2014-10-16
 *******************************************************
 Historique des modifications
@@ -23,18 +23,18 @@ Historique des modifications
 package formes;
 
 
-import comparateur.ComparateurForme;
+import comparateur.AbstractComparateurForme;
 
 public class TableauFormes {
 
 	private static final int NB_MAX_FORMES = 10;
 
-	private Forme teteListeOriginale;
-	private Forme teteListeModifiee;
+	private transient AbstractForme teteListeOriginale;
+	private transient AbstractForme teteListeModifiee;
 
-	private Forme queueListeOriginale;
+	private transient AbstractForme queueListeOriginale;
 
-	private Boolean trie = false;
+	private transient Boolean trie;
 
 	// Constructeur publique sans parametre..
 	public TableauFormes() {
@@ -43,15 +43,17 @@ public class TableauFormes {
 	}
 	
 	// Setteur de trie
-	public void setTrie(boolean trie) {
+	public void setTrie(final boolean trie) {
 		this.trie = trie;
 	}
 
 	// Fonction permettant d'obtenir le nombre de forme de la liste
 	private int nbFormes(){
 		int nbFormes = 0;
-		Forme f = teteListeOriginale;
-		if(f == null) return 0;
+		AbstractForme f = teteListeOriginale;
+		if(f == null) {
+			nbFormes = 0;
+		}
 
 		while(f.obtenirFormeSuivante() != null){
 			nbFormes++;
@@ -61,14 +63,16 @@ public class TableauFormes {
 	}
 
 	// Permet d'ajouter une forme a la liste (FIFO)
-	public void ajouterForme(Forme nouvelleForme){
+	public void ajouterForme(final AbstractForme nouvelleForme){
 		if(nbFormes() == NB_MAX_FORMES-1){
 			decalerListe();
 		}
-		if(queueListeOriginale != null)
+		if(queueListeOriginale != null) {
 			queueListeOriginale.assignerFormeSuivante(nouvelleForme);
-		if(teteListeOriginale == null)
+		}
+		if(teteListeOriginale == null) {
 			teteListeOriginale = nouvelleForme;
+		}
 		queueListeOriginale = nouvelleForme;
 	}
 
@@ -79,24 +83,23 @@ public class TableauFormes {
 	}
 
 	/*
-	 * CODE EMPRUNTÉ
+	 * CODE EMPRUNTï¿½
 	 * 
-	 * l'algorythme de tri qui suit, ainsi que la fonction echangerAvecSuivant (lignes 91 à 170),
-	 * ont été basé sur le tutoriel suivant:
+	 * l'algorythme de tri qui suit, ainsi que la fonction echangerAvecSuivant (lignes 91 ï¿½ 170),
+	 * ont ï¿½tï¿½ basï¿½ sur le tutoriel suivant:
 	 * 
 	 * http://javarevisited.blogspot.ca/2014/08/bubble-sort-algorithm-in-java-with.html
 	 * par Javin Paul
 	 * 
 	 */
-	
-	public int trier(ComparateurForme comparator) {
+	public int trier(final AbstractComparateurForme comparator) {
 	
 		try {
 			// cree une copie de la liste
-			teteListeModifiee = (Forme) teteListeOriginale.clone();
-			Forme indexClonage = teteListeModifiee;
+			teteListeModifiee = (AbstractForme) teteListeOriginale.clone();
+			AbstractForme indexClonage = teteListeModifiee;
 			while(indexClonage.obtenirFormeSuivante() != null){
-				Forme suiv = indexClonage.obtenirFormeSuivante().clone();
+				final AbstractForme suiv = indexClonage.obtenirFormeSuivante().clone();
 				indexClonage.assignerFormeSuivante(suiv);
 				suiv.assignerFormePrecedente(indexClonage);
 				indexClonage = suiv;
@@ -105,7 +108,7 @@ public class TableauFormes {
 			e1.printStackTrace();
 		}
 		
-		Forme teteDeTri = teteListeModifiee;
+		AbstractForme teteDeTri = teteListeModifiee;
 		boolean triTermine = false;
 		
 		// Tri la liste jusqu'a ce que TOUS les elements soient tries
@@ -122,7 +125,9 @@ public class TableauFormes {
 					if(teteDeTri.obtenirFormeSuivante() !=null && comparator.compare(teteDeTri, teteDeTri.obtenirFormeSuivante()) > 0){
 						echangerAvecSuivant(teteDeTri);
 						triTermine = false;
-					}else teteDeTri = teteDeTri.obtenirFormeSuivante();
+					}else {
+						teteDeTri = teteDeTri.obtenirFormeSuivante();
+					}
 				}
 			}
 		} catch(Exception e){
@@ -142,19 +147,19 @@ public class TableauFormes {
 	}
 		 
 	// L'equivalent du "swap" du bubble sort
-	private void echangerAvecSuivant(Forme noeud){
-		Forme suivant = noeud.obtenirFormeSuivante();
+	private void echangerAvecSuivant(final AbstractForme noeud){
+		final AbstractForme suivant = noeud.obtenirFormeSuivante();
 		if(suivant != null){
 			if(!noeud.estTete()){
 				// Permet d'interchanger 
-				Forme prec = noeud.obtenirFormePrecedente();
+				final AbstractForme prec = noeud.obtenirFormePrecedente();
 				prec.assignerFormeSuivante(suivant);
 				suivant.assignerFormePrecedente(prec);
 			}else{
 				suivant.assignerFormePrecedente(null);
 		 	}
 			
-			Forme apresSuivant = suivant.obtenirFormeSuivante();
+			final AbstractForme apresSuivant = suivant.obtenirFormeSuivante();
 			
 			if(apresSuivant != null){
 				noeud.assignerFormeSuivante(apresSuivant);
@@ -170,7 +175,7 @@ public class TableauFormes {
 	}
 
 
-	public Forme debut(){
+	public AbstractForme debut(){
 		return trie?teteListeModifiee:teteListeOriginale;
 	}
 //  http://javarevisited.blogspot.ca/2014/08/bubble-sort-algorithm-in-java-with.html
