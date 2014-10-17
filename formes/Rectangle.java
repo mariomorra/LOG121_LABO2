@@ -19,11 +19,6 @@ Historique des modifications
 package formes;
 
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -65,12 +60,12 @@ public class Rectangle extends Forme {
 	};
 
 	public void dessinerForme(Graphics g, int x, int y) {
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, obtenirLargeur(), obtenirHauteur());
 		g.setColor(couleur);
 		g.fillRect(x, y, obtenirLargeur(), obtenirHauteur());
 		if(x != x1 && y != y1)
 			dessinerCadre(g, x, y);
-		g.setColor(Color.BLACK);
-		g.drawRect(x, y, obtenirLargeur(), obtenirHauteur());
 	}
 
 	public void dessinerCadre(Graphics g, int x, int y) {

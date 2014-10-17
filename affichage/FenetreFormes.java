@@ -27,9 +27,6 @@ Historique des modifications
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.beans.PropertyChangeEvent;
-import java.util.Comparator;
-import java.util.ListIterator;
 
 import javax.swing.JComponent;
 
@@ -80,18 +77,21 @@ public class FenetreFormes extends JComponent{
 		int i = 0;
 		Forme formeActuelle = formesList.debut();
 		while(formeActuelle != null){
+		// Si la liste a ete trie, on affiche selon la position x * 40	
 			if(formesList.estTrie()) {
 				formeActuelle.dessinerForme(g, i*offsetX, i*offsetY);
-			} else formeActuelle.dessinerForme(g);
+			} else formeActuelle.dessinerForme(g);	// Sinon on affiche la forme 
+			// Permet d'avoir un index pour la liste triee (i * 40)
 			i++;
 			formeActuelle = formeActuelle.obtenirFormeSuivante();
 		}
+		// Reinitialise la variable trie a false afin de pouvoir retrier
 		formesList.setTrie(false);
 	}
 	
 	/**
 	 * Le Layout qui utilise (contient) FenetreFormes doit r??server 
-	 * l'espace n??cessaire ?? son affichage
+	 * l'espace necessaire et son affichage
 	 */
 	@Override 
 	public Dimension getPreferredSize(){
@@ -99,15 +99,17 @@ public class FenetreFormes extends JComponent{
 	}
 	
 	/**
-	 * @param f prend une Forme et l'ajoute ?? la fin de la liste des formes ?? dessiner. Si la liste d??passerait 10, les ??l??ments les plus vieux (les premiers de la liste) se font enlever.
+	 * @param f prend une Forme et l'ajoute a la fin de la liste des formes a dessiner. Si la liste depasserait 10, les elements les plus vieux (les premiers de la liste) se font enlever.
 	 */
 	public void ajout(Forme nouvelleForme){
 		formesList.ajouterForme(nouvelleForme);
 		repaint();
 	}
 	
+	// Fonction permettant la communication entre FenetreFormes et CommBase
 	public void firePropertyChange(String type, Object nouveau, Object vieux){
 		ComparateurForme comparator = null;
+		// Permet de creer le bon comparateur selon la valeur selectionne dans la liste
 		switch(type){
 			case "NseqCroissant":
 				comparator = new ComparateurNumSeqCroissant();
@@ -158,6 +160,7 @@ public class FenetreFormes extends JComponent{
 				break;
 			default : return;
 		}
+		// Si le comparateur a une valeur, on tri les formes selon la demande et on repeinture le graphique
 		if(comparator != null) formesList.trier(comparator);
 		repaint();
 	}

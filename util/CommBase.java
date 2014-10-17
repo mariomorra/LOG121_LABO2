@@ -185,7 +185,9 @@ public class CommBase{
 						isActif = false;
 					}
 				}
-				if(shell == null) firePropertyChange("CONNEXION", null, (Object) "END");
+				if(shell == null) {
+					firePropertyChange("CONNEXION", null, (Object) "END");
+				}
 				stop();
 				return null;
 			}
@@ -205,7 +207,8 @@ public class CommBase{
 		return isActif;
 	}
 	
-	public void firePropertyChange(String type, Object nouveau, Object vieux){
-		listener.propertyChange(new PropertyChangeEvent(this, "TRI", vieux, nouveau));
+	// Fonction permettant 
+	public void firePropertyChange(String type, Object typeTri){
+		listener.propertyChange(new PropertyChangeEvent(this, "TRI", typeTri, null));
 	}
 }

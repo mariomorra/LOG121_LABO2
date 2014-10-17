@@ -50,6 +50,7 @@ public abstract class Forme implements Cloneable, FormeChainee, Dessinable{
 	public abstract void dessinerForme(Graphics g);
 	public abstract void dessinerForme(Graphics g, int x, int y);
 	
+	// Fonctione permettant de dessiner le cardre pointille autour des formes
 	public void dessinerCadre(Graphics g, int x, int y){
 
 		Graphics2D g2d = (Graphics2D) g.create();
@@ -59,7 +60,6 @@ public abstract class Forme implements Cloneable, FormeChainee, Dessinable{
 		
 	};
 	
-
 	public Forme obtenirFormePrecedente(){
 		return formePrecedente;
 	}

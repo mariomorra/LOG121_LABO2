@@ -35,7 +35,6 @@ import javax.swing.JOptionPane;
 
 import util.CommBase;
 import util.ParseurRegex;
-import ca.etsmtl.log.util.IDLogger;
 import formes.UsineFormes;
 
 /**
@@ -72,17 +71,18 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 	// Appel?? lorsque le sujet lance "firePropertyChanger"
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
-		if(arg0.getPropertyName().equals("FORME-CREE")){
+		if(arg0.getPropertyName().equals("FORME-CREE"))	{
 			String formeString = (String) arg0.getNewValue();
+			menu.nettoyerMenuTrier();	// Enleve l'element selectionne de la liste de tri
 			
 			if(formeString != null){
 				System.out.println("adding : " + formeString);
+				//	Permet de creer la forme recu du serveur
 				fenetreFormes.ajout(UsineFormes.genereForme(ParseurRegex.getDescription(formeString)));
 			}
 			
 		}else if(arg0.getPropertyName().equals("CONNEXION")){
 			String statusString = (String) arg0.getNewValue();
-			
 			if(statusString != null && statusString.equals("END")){
 				JOptionPane.showMessageDialog(null, "Le serveur a d??connect?? de fa??on inattendue.");
 			}

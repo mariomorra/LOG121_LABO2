@@ -23,7 +23,6 @@ Historique des modifications
 *******************************************************/
 
 
-import java.awt.Color;
 
 import util.ParseurRegex;
 

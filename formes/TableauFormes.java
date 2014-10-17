@@ -18,7 +18,6 @@ Historique des modifications
 
 package formes;
 
-import java.awt.Graphics;
 
 import comparateur.ComparateurForme;
 
@@ -30,20 +29,21 @@ public class TableauFormes {
 	private Forme teteListeModifiee;
 
 	private Forme queueListeOriginale;
-	private Forme queueListeModifiee;
 
 	private Boolean trie = false;
 
+	// Constructeur publique sans parametre..
 	public TableauFormes() {
 		teteListeOriginale = null;
 		teteListeModifiee = null;
-		trie = false;
 	}
 	
+	// Setteur de trie
 	public void setTrie(boolean trie) {
 		this.trie = trie;
 	}
 
+	// Fonction permettant d'obtenir le nombre de forme de la liste
 	private int nbFormes(){
 		int nbFormes = 0;
 		Forme f = teteListeOriginale;
@@ -56,6 +56,7 @@ public class TableauFormes {
 		return nbFormes;
 	}
 
+	// Permet d'ajouter une forme a la liste (FIFO)
 	public void ajouterForme(Forme nouvelleForme){
 		if(nbFormes() == NB_MAX_FORMES-1){
 			decalerListe();
@@ -67,6 +68,7 @@ public class TableauFormes {
 		queueListeOriginale = nouvelleForme;
 	}
 
+	// Fonction permettant d'ajouter des formes et de decaler la liste
 	private void decalerListe(){
 		teteListeOriginale = teteListeOriginale.obtenirFormeSuivante();
 		teteListeOriginale.assignerFormePrecedente(null);
@@ -92,7 +94,9 @@ public class TableauFormes {
 		
 		Forme teteDeTri = teteListeModifiee;
 		boolean triTermine = false;
-
+		
+		// Tri la liste jusqu'a ce que TOUS les elements soient tries
+		// inspire du Bubble Sort
 		try{
 			while(!triTermine){
 			 	triTermine = true;
@@ -101,6 +105,7 @@ public class TableauFormes {
 					teteDeTri = teteDeTri.obtenirFormePrecedente();
 				}
 				while(teteDeTri != null){
+					// Permet d'etablir la tete de tri
 					if(teteDeTri.obtenirFormeSuivante() !=null && comparator.compare(teteDeTri, teteDeTri.obtenirFormeSuivante()) > 0){
 						echangerAvecSuivant(teteDeTri);
 						triTermine = false;
@@ -123,11 +128,12 @@ public class TableauFormes {
 		return 1;
 	}
 		 
+	// L'equivalent du "swap" du bubble sort
 	private void echangerAvecSuivant(Forme noeud){
 		Forme suivant = noeud.obtenirFormeSuivante();
 		if(suivant != null){
-			
 			if(!noeud.estTete()){
+				// Permet d'interchanger 
 				Forme prec = noeud.obtenirFormePrecedente();
 				prec.assignerFormeSuivante(suivant);
 				suivant.assignerFormePrecedente(prec);
@@ -155,7 +161,8 @@ public class TableauFormes {
 		return trie?teteListeModifiee:teteListeOriginale;
 	}
 //  http://javarevisited.blogspot.ca/2014/08/bubble-sort-algorithm-in-java-with.html
-
+	
+	// Utilise lors de l'impression des formes afin de dessiner a coordonnes speciales
 	public boolean estTrie() {
 		return trie;
 	}
