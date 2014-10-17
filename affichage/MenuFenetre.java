@@ -3,16 +3,16 @@ package affichage;
 Cours :				LOG121
 Session :			Automne 2014
 Groupe :			01
-Projet :			Exercice 1
+Projet :			Laboratoire 2
 
-??tudiant(e)(s) :	Kolytchev, Dmitri
-Code(s) perm. :		KOLD15088804
+Étudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
+Code(s) perm. :		KOLD15088804, MORM07039202, GIRA08059305
 
 Professeur :		Ghizlane El boussaidi
-Charg??s de labo.:	Alvine Boaye Belle et Michel Gagnon
-Nom du fichier:		MenuFenetre.java
-Date cr??e :			2013-05-03
-Date dern. modif.	2014-09-17
+Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Nom du fichier :	MenuFenetre.java
+Date crée :			2013-05-03
+Date dern. modif.	2014-10-16
 *******************************************************
 Historique des modifications
 *******************************************************
@@ -39,7 +39,7 @@ import javax.swing.KeyStroke;
 import util.CommBase;
 
 /**
- * Cr??e le menu de la fen??tre de l'application??
+ * Crée le menu de la fenêtre de l'application
  */
 public class MenuFenetre extends JMenuBar{
 
@@ -62,7 +62,7 @@ public class MenuFenetre extends JMenuBar{
 	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";  
 	private static final int DELAI_QUITTER_MSEC = 200;
 
-	CommBase comm; // Pour activer/d??sactiver la communication avec le serveur
+	CommBase comm; // Pour activer/désactiver la communication avec le serveur
 
 	/**
 	 * Constructeur
@@ -76,7 +76,7 @@ public class MenuFenetre extends JMenuBar{
 	}
 
 	/**
-	 *  Cr??er le menu "Draw".
+	 *  Créer le menu "Draw".
 	 */
 	protected void addMenuDessiner() {
 		JMenu menu = creerMenu(MENU_DESSIN_TITRE, new String[] { MENU_DESSIN_DEMARRER });
@@ -95,7 +95,7 @@ public class MenuFenetre extends JMenuBar{
 	}
 
 	/**
-	 * Cr??er le menu "File".
+	 * Créer le menu "File".
 	 */
 	protected void addMenuFichier() {
 		JMenu menu = creerMenu(MENU_FICHIER_TITRE, new String[] { MENU_FICHIER_QUITTER });
@@ -123,7 +123,7 @@ public class MenuFenetre extends JMenuBar{
 	}
 
 	/**
-	 *  Cr??er le menu "Help".
+	 *  Créer le menu "Help".
 	 */
 	private void addMenuAide() {
 		JMenu menu = creerMenu(MENU_AIDE_TITRE, new String[] { MENU_AIDE_PROPOS });
@@ -137,9 +137,9 @@ public class MenuFenetre extends JMenuBar{
 	}
 
 	/**
-	 * Cr??er un ??l??ment de menu ?? partir d'un champs principal et ses ??l??ments
+	 * Créer un élément de menu à partir d'un champs principal et ses éléments
 	 * @param titleKey champs principal
-	 * @param itemKeys ??l??ments
+	 * @param itemKeys éléments
 	 * @return le menu
 	 */
 	private static JMenu creerMenu(String titleKey,String[] itemKeys) {

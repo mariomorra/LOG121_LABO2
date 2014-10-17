@@ -5,16 +5,16 @@ import util.CommBase;
 Cours :				LOG121
 Session :			Automne 2014
 Groupe :			01
-Projet :			Exercice 1
+Projet :			Laboratoire 2
 
-??tudiant(e)(s) :	Kolytchev, Dmitri
-Code(s) perm. :		KOLD15088804
+Étudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
+Code(s) perm. :		KOLD15088804, MORM07039202, GIRA08059305
 
 Professeur :		Ghizlane El boussaidi
-Charg??s de labo.:	Alvine Boaye Belle et Michel Gagnon
+Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
 Nom du fichier :	ApplicationFormes.java
-Date cr??e :			2013-05-03
-Date dern. modif.	2014-09-17
+Date crée :			2013-05-03
+Date dern. modif.	2014-10-16
 *******************************************************
 Historique des modifications
 *******************************************************
@@ -28,7 +28,7 @@ Historique des modifications
 
 
 /**
- * Cette classe repr??sente l'application dans son ensemble. 
+ * Cette classe représente l'application dans son ensemble. 
  * @author Patrice Boucher
  * @date 2013/05/04
  */

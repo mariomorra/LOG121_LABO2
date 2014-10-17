@@ -1,21 +1,25 @@
-/*******************************************************
-Cours : LOG121
-Session : A2014
-Groupe : 01
-Projet : Laboratoire #1
-???tudiant : Mario Morra
-Code(s) perm. : MORM07039202 (AM54710)
-Professeur : Ghizlane El boussaidi
-Charg???s de labo : Alvine Boaye Belle et Michel Gagnon
-Nom du fichier : TableauFormes.java
-Date cr?????? : 2014-09-20
-Date dern. modif. 2014-09-20
+/******************************************************
+Cours :				LOG121
+Session :			Automne 2014
+Groupe :			01
+Projet :			Laboratoire 2
+
+Étudiant(e)(s) :	Kolytchev Dmitri, Morra Mario, Girard Alexandre.
+Code(s) perm. :		KOLD15088804, MORM07039202, GIRA08059305
+
+Professeur :		Ghizlane El boussaidi
+Chargés de labo.:	Alvine Boaye Belle et Michel Gagnon
+Nom du fichier :	TableauFormes.java
+Date crée :			2013-05-03
+Date dern. modif.	2014-10-16
 *******************************************************
 Historique des modifications
 *******************************************************
-2014-09-20 Version initiale
+*@author Dmitri Kolytchev
+*2014-09-17 Adaptation initiale du squelette
+*@author Patrice Boucher
+*2013-05-03 Version initiale
 *******************************************************/
-
 package formes;
 
 
@@ -74,7 +78,17 @@ public class TableauFormes {
 		teteListeOriginale.assignerFormePrecedente(null);
 	}
 
-
+	/*
+	 * CODE EMPRUNTÉ
+	 * 
+	 * l'algorythme de tri qui suit, ainsi que la fonction echangerAvecSuivant (lignes 91 à 170),
+	 * ont été basé sur le tutoriel suivant:
+	 * 
+	 * http://javarevisited.blogspot.ca/2014/08/bubble-sort-algorithm-in-java-with.html
+	 * par Javin Paul
+	 * 
+	 */
+	
 	public int trier(ComparateurForme comparator) {
 	
 		try {
@@ -88,7 +102,6 @@ public class TableauFormes {
 				indexClonage = suiv;
 			}
 		} catch (CloneNotSupportedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
