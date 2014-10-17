@@ -170,6 +170,9 @@ public class CommBase{
 						isActif = false;
 					}
 				}
+				
+				firePropertyChange("CONNEXION", null, (Object) "COMPLETE");
+				
 				if(shell == null) {
 					firePropertyChange("CONNEXION", null, (Object) "END");
 				}

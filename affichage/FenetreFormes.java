@@ -93,8 +93,6 @@ public class FenetreFormes extends JComponent{
 			i++;
 			formeActuelle = formeActuelle.obtenirFormeSuivante();
 		}
-		// Reinitialise la variable trie a false afin de pouvoir retrier
-		formesList.setTrie(false);
 	}
 	
 	/**
@@ -173,5 +171,9 @@ public class FenetreFormes extends JComponent{
 			formesList.trier(comparator);
 		}
 		repaint();
+	}
+
+	public void reinitialise() {
+		formesList.remettreANeuf();
 	}
 }

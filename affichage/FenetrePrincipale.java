@@ -85,8 +85,9 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener,
 			final String statusString = (String) arg0.getNewValue();
 			if(statusString != null && statusString.equals("END")){
 				JOptionPane.showMessageDialog(null, "Le serveur a d??connect?? de fa??on inattendue.");
+			}else if(statusString != null && statusString.equals("COMPLETE")){
+				fenetreFormes.reinitialise();
 			}
-			
 		}else if(arg0.getPropertyName().equals("TRI")){
 			fenetreFormes.firePropertyChange(arg0.getOldValue().toString(), null, null);
 		}
