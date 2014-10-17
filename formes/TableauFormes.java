@@ -27,14 +27,14 @@ import comparateur.AbstractComparateurForme;
 
 public class TableauFormes {
 
-	private static final int NB_MAX_FORMES = 10;
+	private final int NB_MAX_FORMES = 10;
 
-	private transient AbstractForme teteListeOriginale;
-	private transient AbstractForme teteListeModifiee;
+	private AbstractForme teteListeOriginale;
+	private AbstractForme teteListeModifiee;
 
-	private transient AbstractForme queueListeOriginale;
+	private AbstractForme queueListeOriginale;
 
-	private transient Boolean trie;
+	private Boolean trie = false;
 
 	// Constructeur publique sans parametre..
 	public TableauFormes() {
@@ -52,7 +52,7 @@ public class TableauFormes {
 		int nbFormes = 0;
 		AbstractForme f = teteListeOriginale;
 		if(f == null) {
-			nbFormes = 0;
+			return 0;
 		}
 
 		while(f.obtenirFormeSuivante() != null){
